@@ -7,23 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0FC835AF24C52302000CB1AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835AE24C52302000CB1AB /* AppDelegate.swift */; };
-		0FC835B124C52302000CB1AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835B024C52302000CB1AB /* SceneDelegate.swift */; };
-		0FC835B324C52302000CB1AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835B224C52302000CB1AB /* ViewController.swift */; };
-		0FC835B624C52302000CB1AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835B424C52302000CB1AB /* Main.storyboard */; };
-		0FC835B824C52303000CB1AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835B724C52303000CB1AB /* Assets.xcassets */; };
-		0FC835BB24C52303000CB1AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835B924C52303000CB1AB /* LaunchScreen.storyboard */; };
+		0FC835CB24C52378000CB1AB /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C324C52377000CB1AB /* PreviewView.swift */; };
+		0FC835CC24C52378000CB1AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835C424C52377000CB1AB /* LaunchScreen.storyboard */; };
+		0FC835CD24C52378000CB1AB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C524C52377000CB1AB /* CameraViewController.swift */; };
+		0FC835CE24C52378000CB1AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C624C52377000CB1AB /* AppDelegate.swift */; };
+		0FC835CF24C52378000CB1AB /* PhotoCaptureDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C724C52377000CB1AB /* PhotoCaptureDelegates.swift */; };
+		0FC835D024C52378000CB1AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835C824C52377000CB1AB /* Assets.xcassets */; };
+		0FC835D124C52378000CB1AB /* ItemSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C924C52377000CB1AB /* ItemSelectionViewController.swift */; };
+		0FC835D224C52378000CB1AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835CA24C52377000CB1AB /* Main.storyboard */; };
+		0FC835D424C52771000CB1AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835D324C52771000CB1AB /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0FC835AB24C52302000CB1AB /* SocialDistancer_v8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialDistancer_v8.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FC835AE24C52302000CB1AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0FC835B024C52302000CB1AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0FC835B224C52302000CB1AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0FC835B524C52302000CB1AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0FC835B724C52303000CB1AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0FC835BA24C52303000CB1AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FC835BC24C52303000CB1AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FC835C224C52376000CB1AB /* SocialDistancer_v8-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocialDistancer_v8-Bridging-Header.h"; sourceTree = "<group>"; };
+		0FC835C324C52377000CB1AB /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		0FC835C424C52377000CB1AB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0FC835C524C52377000CB1AB /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		0FC835C624C52377000CB1AB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0FC835C724C52377000CB1AB /* PhotoCaptureDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegates.swift; sourceTree = "<group>"; };
+		0FC835C824C52377000CB1AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0FC835C924C52377000CB1AB /* ItemSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionViewController.swift; sourceTree = "<group>"; };
+		0FC835CA24C52377000CB1AB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		0FC835D324C52771000CB1AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +63,17 @@
 		0FC835AD24C52302000CB1AB /* SocialDistancer_v8 */ = {
 			isa = PBXGroup;
 			children = (
-				0FC835AE24C52302000CB1AB /* AppDelegate.swift */,
-				0FC835B024C52302000CB1AB /* SceneDelegate.swift */,
-				0FC835B224C52302000CB1AB /* ViewController.swift */,
-				0FC835B424C52302000CB1AB /* Main.storyboard */,
-				0FC835B724C52303000CB1AB /* Assets.xcassets */,
-				0FC835B924C52303000CB1AB /* LaunchScreen.storyboard */,
 				0FC835BC24C52303000CB1AB /* Info.plist */,
+				0FC835D324C52771000CB1AB /* SceneDelegate.swift */,
+				0FC835C624C52377000CB1AB /* AppDelegate.swift */,
+				0FC835C824C52377000CB1AB /* Assets.xcassets */,
+				0FC835C524C52377000CB1AB /* CameraViewController.swift */,
+				0FC835C924C52377000CB1AB /* ItemSelectionViewController.swift */,
+				0FC835C424C52377000CB1AB /* LaunchScreen.storyboard */,
+				0FC835CA24C52377000CB1AB /* Main.storyboard */,
+				0FC835C724C52377000CB1AB /* PhotoCaptureDelegates.swift */,
+				0FC835C324C52377000CB1AB /* PreviewView.swift */,
+				0FC835C224C52376000CB1AB /* SocialDistancer_v8-Bridging-Header.h */,
 			);
 			path = SocialDistancer_v8;
 			sourceTree = "<group>";
@@ -99,6 +110,7 @@
 				TargetAttributes = {
 					0FC835AA24C52302000CB1AB = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -125,9 +137,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FC835BB24C52303000CB1AB /* LaunchScreen.storyboard in Resources */,
-				0FC835B824C52303000CB1AB /* Assets.xcassets in Resources */,
-				0FC835B624C52302000CB1AB /* Main.storyboard in Resources */,
+				0FC835D224C52378000CB1AB /* Main.storyboard in Resources */,
+				0FC835D024C52378000CB1AB /* Assets.xcassets in Resources */,
+				0FC835CC24C52378000CB1AB /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,32 +150,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FC835B324C52302000CB1AB /* ViewController.swift in Sources */,
-				0FC835AF24C52302000CB1AB /* AppDelegate.swift in Sources */,
-				0FC835B124C52302000CB1AB /* SceneDelegate.swift in Sources */,
+				0FC835CE24C52378000CB1AB /* AppDelegate.swift in Sources */,
+				0FC835CB24C52378000CB1AB /* PreviewView.swift in Sources */,
+				0FC835CF24C52378000CB1AB /* PhotoCaptureDelegates.swift in Sources */,
+				0FC835CD24C52378000CB1AB /* CameraViewController.swift in Sources */,
+				0FC835D124C52378000CB1AB /* ItemSelectionViewController.swift in Sources */,
+				0FC835D424C52771000CB1AB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		0FC835B424C52302000CB1AB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0FC835B524C52302000CB1AB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0FC835B924C52303000CB1AB /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0FC835BA24C52303000CB1AB /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0FC835BD24C52303000CB1AB /* Debug */ = {
@@ -284,7 +280,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T97W5AQ7XC;
 				INFOPLIST_FILE = SocialDistancer_v8/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -292,6 +290,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Ben-Bond.SocialDistancer-v8";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SocialDistancer_v8/SocialDistancer_v8-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -301,7 +301,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T97W5AQ7XC;
 				INFOPLIST_FILE = SocialDistancer_v8/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -309,6 +311,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Ben-Bond.SocialDistancer-v8";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SocialDistancer_v8/SocialDistancer_v8-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
