@@ -12,67 +12,148 @@ import MobileCoreServices
 import Accelerate
 import CoreMotion
 
-class CameraViewController: UIViewController, ItemSelectionViewControllerDelegate, AVCaptureDataOutputSynchronizerDelegate {
+class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
-    private let videoDataOutput = AVCaptureVideoDataOutput()
+    var pickerData: [String] = []
+    static var chosenFeet = "0"
+    static var chosenInches = "0"
+    static var chosenRow = 67
+    static let shoulderBodyProportion = 0.82
+    static var useHumanHeight = true
+    let heightLabel = UILabel()
     
-    private let dataOutputQueue = DispatchQueue(label: "video data queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+    @IBOutlet weak var segmentedControlButton: UISegmentedControl!
     
-    func dataOutputSynchronizer(_ synchronizer: AVCaptureDataOutputSynchronizer,
-                                didOutput synchronizedDataCollection: AVCaptureSynchronizedDataCollection) {
-        let renderingEnabled = true
-        
-        // Read all outputs
-        guard renderingEnabled,
-            let syncedDepthData: AVCaptureSynchronizedDepthData =
-            synchronizedDataCollection.synchronizedData(for: depthDataOutput) as? AVCaptureSynchronizedDepthData,
-            let syncedVideoData: AVCaptureSynchronizedSampleBufferData =
-            synchronizedDataCollection.synchronizedData(for: videoDataOutput) as? AVCaptureSynchronizedSampleBufferData else {
-                // only work on synced pairs
-                return
-        }
-        if syncedDepthData.depthDataWasDropped || syncedVideoData.sampleBufferWasDropped {
-            return
-        }
-        let depthData = syncedDepthData.depthData
-        let depthPixelBuffer = depthData.depthDataMap
-        let sampleBuffer = syncedVideoData.sampleBuffer
-        guard let videoPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
-            let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer) else {
-                return
-        }
-        //let point = CGPoint(0,0)
-    }
-    
-    @objc
-    func thermalStateChanged(notification: NSNotification) {
-        if let processInfo = notification.object as? ProcessInfo {
-            showThermalState(state: processInfo.thermalState)
+    @IBAction func changeSegmentedControl(_ sender: UISegmentedControl) {
+        switch segmentedControlButton.selectedSegmentIndex {
+            case 0:
+                DataViewController.useHumanHeight = true
+            case 1:
+                DataViewController.useHumanHeight = false
+            default:
+                DataViewController.useHumanHeight = true
         }
     }
     
-    func showThermalState(state: ProcessInfo.ThermalState) {
-        DispatchQueue.main.async {
-            var thermalStateString = "UNKNOWN"
-            if state == .nominal {
-                thermalStateString = "NOMINAL"
-            } else if state == .fair {
-                thermalStateString = "FAIR"
-            } else if state == .serious {
-                thermalStateString = "SERIOUS"
-            } else if state == .critical {
-                thermalStateString = "CRITICAL"
+    @IBOutlet weak var heightPicker: UIPickerView!
+    @IBOutlet weak var heightStackView: UIStackView!
+    
+    @IBOutlet weak var goBack: UIButton!
+
+    @IBOutlet weak var sayThisTextField: UITextField!
+    static var sayThisText = "Oh no! Violating Social Distancing!"
+    
+    @IBAction func goBack(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        DataViewController.sayThisText = self.sayThisTextField.text ?? ""
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.heightPicker.delegate = self
+        self.heightPicker.dataSource = self
+        self.sayThisTextField.delegate = self
+        self.sayThisTextField.placeholder = DataViewController.sayThisText
+        //pickerData = [["0", "1", "2", "3", "4", "5", "6", "7"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]]
+        for feet in 0...7 {
+            for inches in 0...11 {
+                pickerData.append("\(feet)'\(inches)\"")
             }
-            
-            let message = NSLocalizedString("Thermal state: \(thermalStateString)", comment: "Alert message when thermal state has changed")
-            let alertController = UIAlertController(title: "TrueDepthStreamer", message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+        }
+        if DataViewController.useHumanHeight {
+            segmentedControlButton.selectedSegmentIndex = 0
+        } else {
+            segmentedControlButton.selectedSegmentIndex = 1
+        }
+        print("DataViewController.chosenRow: \(DataViewController.chosenRow)")
+        self.heightPicker.selectRow(DataViewController.chosenRow, inComponent: 0, animated: false)
+        self.heightLabel.text = "Height:"
+        
+        self.heightPicker.setPickerLabels(labels: [0: self.heightLabel], containedView: heightStackView)
+    }
+    
+    // Number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return for the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        DataViewController.chosenRow = row
+        print("New DataViewController.chosenRow: \(DataViewController.chosenRow)")
+        let val = pickerData[row]
+        print("row:\(row) val:\(val)")
+        let valArr = val.components(separatedBy: "'")
+        DataViewController.chosenFeet = valArr[0]
+        DataViewController.chosenInches = String(valArr[1].dropLast())
+        print("feet: \(DataViewController.chosenFeet)")
+        print("inches: \(DataViewController.chosenInches)")
+    }
+ 
+    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    return 1.0
+}
+    
+    func getHeight() -> Int {
+        //print("calculating height")
+        //print(DataViewController.chosenFeet)
+        //print((Int(DataViewController.chosenFeet) ?? 0) * 12)
+        var height = (Int(DataViewController.chosenFeet) ?? 0) * 12 + (Int(DataViewController.chosenInches) ?? 0)
+        if (DataViewController.useHumanHeight) {
+            height = Int(Double(height) * DataViewController.shoulderBodyProportion)
+        }
+        return height
+    }
+}
+
+extension UIPickerView {
+   
+    func setPickerLabels(labels: [Int:UILabel], containedView: UIView) { // [component number:label]
+        
+        let fontSize:CGFloat = 20
+        let labelWidth:CGFloat = containedView.bounds.width / CGFloat(self.numberOfComponents)
+        let x:CGFloat = self.frame.origin.x
+        let y:CGFloat = (self.frame.size.height / 2) - (fontSize / 2)
+        
+        for i in 0...self.numberOfComponents {
+            if let label = labels[i] {
+                if self.subviews.contains(label) {
+                    label.removeFromSuperview()
+                }
+                
+                label.frame = CGRect(x: x + labelWidth * CGFloat(i), y: y, width: labelWidth, height: fontSize)
+                label.font = UIFont.boldSystemFont(ofSize: fontSize)
+                label.backgroundColor = .clear
+                label.textAlignment = NSTextAlignment.left
+                
+                self.addSubview(label)
+            }
         }
     }
+}
+
+class CameraViewController: UIViewController, ItemSelectionViewControllerDelegate {
+    
+    let dataViewController = DataViewController()
+    
+    let synthesizer = AVSpeechSynthesizer()
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        return .portrait
     }
     private var spinner: UIActivityIndicatorView!
     
@@ -84,8 +165,21 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         return view.window?.windowScene?.interfaceOrientation ?? .unknown
     }
     
-    private let phoneHeight = 57.0
-
+    var yellingEnabled = false
+    @IBAction func pressEnableYelling(_ sender: Any) {
+        self.yellingEnabled = true
+    }
+    
+    @IBAction func releaseEnableYelling(_ sender: Any) {
+        self.yellingEnabled = false
+    }
+    
+    private var distanceString = "Distance: ???"
+    private var distance = 1200.0
+    let safeDistance = 6 * 12
+    
+    @IBOutlet weak var distanceDisplay: UILabel!
+    
     // MARK: View Controller Life Cycle
     
     override func viewDidLoad() {
@@ -108,11 +202,28 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
                     let roll = validData.attitude.roll
                     let pitch = validData.attitude.pitch
                     let yaw = validData.attitude.yaw
-                    let distance = tan(pitch) * self.phoneHeight
-                    print("Distance: \(Int(distance/12))'\(Int(distance)%12)\"")
+                    self.distance = tan(pitch) * Double(self.dataViewController.getHeight())
+                    self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
+                    //print("\(self.distance)")
+                    //print(self.distanceString)
+                    //print("Say This: \(DataViewController.sayThisText)")
+                    DispatchQueue.main.async {
+                        self.distanceDisplay.text = self.distanceString
+                    }
+                    if (Int(self.distance) <= self.safeDistance) {
+                        DispatchQueue.main.async {
+                            self.distanceDisplay.backgroundColor = UIColor.red
+                        }
+                        if (!self.synthesizer.isSpeaking) && (self.yellingEnabled) {
+                            self.yell()
+                        }
+                    }  else if (Int(self.distance) > self.safeDistance) {
+                        DispatchQueue.main.async {
+                            self.distanceDisplay.backgroundColor = UIColor.black
+                        }
+                    }
                  }
             })
-
             print("Device motion started")
         }
         else {
@@ -120,7 +231,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
         
         // Disable the UI. Enable the UI later, if and only if the session starts running.
-        cameraButton.isEnabled = false
         
         // Set up the video preview view.
         previewView.session = session
@@ -173,6 +283,9 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             self.spinner = UIActivityIndicatorView(style: .large)
             self.spinner.color = UIColor.yellow
             self.previewView.addSubview(self.spinner)
+        }
+        DispatchQueue.main.async{
+            self.distanceDisplay.text = self.distanceString
         }
     }
     
@@ -255,7 +368,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
     }
     
-    // MARK: Session Management
+    
     
     private enum SessionSetupResult {
         case success
@@ -299,14 +412,14 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             var defaultVideoDevice: AVCaptureDevice?
             
             // Choose the back dual camera, if available, otherwise default to a wide angle camera.
-            if let frontCameraDevice = AVCaptureDevice.default(.builtInTrueDepthCamera, for: .video, position: .front) {
-                // If the rear wide angle camera isn't available, default to the front wide angle camera.
-                defaultVideoDevice = frontCameraDevice
-            } else if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
+            if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
                 defaultVideoDevice = dualCameraDevice
             } else if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
                 // If a rear dual camera is not available, default to the rear wide angle camera.
                 defaultVideoDevice = backCameraDevice
+            } else if let frontCameraDevice = AVCaptureDevice.default(.builtInTrueDepthCamera, for: .video, position: .front) {
+                // If the rear wide angle camera isn't available, default to the front wide angle camera.
+                defaultVideoDevice = frontCameraDevice
             }
             guard let videoDevice = defaultVideoDevice else {
                 print("Default video device is unavailable.")
@@ -345,52 +458,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
                 session.commitConfiguration()
                 return
             }
-            
-            let depthFormats = videoDevice.activeFormat.supportedDepthDataFormats
-            let filtered = depthFormats.filter({
-                CMFormatDescriptionGetMediaSubType($0.formatDescription) == kCVPixelFormatType_DepthFloat16
-            })
-            let selectedFormat = filtered.max(by: {
-                first, second in CMVideoFormatDescriptionGetDimensions(first.formatDescription).width < CMVideoFormatDescriptionGetDimensions(second.formatDescription).width
-            })
-            
-            do {
-                try videoDevice.lockForConfiguration()
-                videoDevice.activeDepthDataFormat = selectedFormat
-                videoDevice.unlockForConfiguration()
-            } catch {
-                print("Could not lock device for configuration: \(error)")
-                setupResult = .configurationFailed
-                session.commitConfiguration()
-                return
-            }
-            
-            if session.canAddOutput(depthDataOutput) {
-                session.addOutput(depthDataOutput)
-                depthDataOutput.isFilteringEnabled = true
-                if let connection = depthDataOutput.connection(with: .depthData) {
-                    connection.isEnabled = true
-                } else {
-                    print("No AVCaptureConnection")
-                }
-            } else {
-                print("Could not add depth data output to the session")
-                setupResult = .configurationFailed
-                session.commitConfiguration()
-                return
-            }
-            if session.canAddOutput(videoDataOutput) {
-                session.addOutput(videoDataOutput)
-                videoDataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
-            } else {
-                print("Could not add video data output to the session")
-                setupResult = .configurationFailed
-                session.commitConfiguration()
-                return
-            }
-            outputSynchronizer = AVCaptureDataOutputSynchronizer(dataOutputs: [videoDataOutput, depthDataOutput])
-            outputSynchronizer!.setDelegate(self, queue: dataOutputQueue)
-            
         } catch {
             print("Couldn't create video device input: \(error)")
             setupResult = .configurationFailed
@@ -440,6 +507,14 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         session.commitConfiguration()
     }
     
+    
+    func yell() {
+        let utterance = AVSpeechUtterance(string: DataViewController.sayThisText)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Karen-compact")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        self.synthesizer.speak(utterance)
+    }
+    
     @IBAction private func resumeInterruptedSession(_ resumeButton: UIButton) {
         sessionQueue.async {
             /*
@@ -471,92 +546,13 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     
     // MARK: Device Configuration
     
-    @IBOutlet private weak var cameraButton: UIButton!
     
     @IBOutlet private weak var cameraUnavailableLabel: UILabel!
     
     private let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
                                                                                mediaType: .video, position: .unspecified)
     
-    /// - Tag: ChangeCamera
-    @IBAction private func changeCamera(_ cameraButton: UIButton) {
-        cameraButton.isEnabled = false
-        
-        sessionQueue.async {
-            let currentVideoDevice = self.videoDeviceInput.device
-            let currentPosition = currentVideoDevice.position
-            
-            let preferredPosition: AVCaptureDevice.Position
-            let preferredDeviceType: AVCaptureDevice.DeviceType
-            
-            switch currentPosition {
-            case .unspecified, .front:
-                preferredPosition = .back
-                preferredDeviceType = .builtInDualCamera
-                
-            case .back:
-                preferredPosition = .front
-                preferredDeviceType = .builtInTrueDepthCamera
-                
-            @unknown default:
-                print("Unknown capture position. Defaulting to back, dual-camera.")
-                preferredPosition = .back
-                preferredDeviceType = .builtInDualCamera
-            }
-            let devices = self.videoDeviceDiscoverySession.devices
-            var newVideoDevice: AVCaptureDevice? = nil
-            
-            // First, seek a device with both the preferred position and device type. Otherwise, seek a device with only the preferred position.
-            if let device = devices.first(where: { $0.position == preferredPosition && $0.deviceType == preferredDeviceType }) {
-                newVideoDevice = device
-            } else if let device = devices.first(where: { $0.position == preferredPosition }) {
-                newVideoDevice = device
-            }
-            
-            if let videoDevice = newVideoDevice {
-                do {
-                    let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-                    
-                    self.session.beginConfiguration()
-                    
-                    // Remove the existing device input first, because AVCaptureSession doesn't support
-                    // simultaneous use of the rear and front cameras.
-                    self.session.removeInput(self.videoDeviceInput)
-                    
-                    if self.session.canAddInput(videoDeviceInput) {
-                        NotificationCenter.default.removeObserver(self, name: .AVCaptureDeviceSubjectAreaDidChange, object: currentVideoDevice)
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.subjectAreaDidChange), name: .AVCaptureDeviceSubjectAreaDidChange, object: videoDeviceInput.device)
-                        
-                        self.session.addInput(videoDeviceInput)
-                        self.videoDeviceInput = videoDeviceInput
-                    } else {
-                        self.session.addInput(self.videoDeviceInput)
-                    }
-                    
-                    /*
-                     Set Live Photo capture and depth data delivery if it's supported. When changing cameras, the
-                     `livePhotoCaptureEnabled` and `depthDataDeliveryEnabled` properties of the AVCapturePhotoOutput
-                     get set to false when a video device is disconnected from the session. After the new video device is
-                     added to the session, re-enable them on the AVCapturePhotoOutput, if supported.
-                     */
-                    self.photoOutput.isLivePhotoCaptureEnabled = self.photoOutput.isLivePhotoCaptureSupported
-                    self.photoOutput.isDepthDataDeliveryEnabled = self.photoOutput.isDepthDataDeliverySupported
-                    self.photoOutput.isPortraitEffectsMatteDeliveryEnabled = self.photoOutput.isPortraitEffectsMatteDeliverySupported
-                    self.photoOutput.enabledSemanticSegmentationMatteTypes = self.photoOutput.availableSemanticSegmentationMatteTypes
-                    self.selectedSemanticSegmentationMatteTypes = self.photoOutput.availableSemanticSegmentationMatteTypes
-                    self.photoOutput.maxPhotoQualityPrioritization = .quality
-                    
-                    self.session.commitConfiguration()
-                } catch {
-                    print("Error occurred while creating video device input: \(error)")
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.cameraButton.isEnabled = true
-            }
-        }
-    }
+
     
     @IBAction private func focusAndExposeTap(_ gestureRecognizer: UITapGestureRecognizer) {
         let devicePoint = previewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
@@ -649,11 +645,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             let isDepthDeliveryDataEnabled = self.photoOutput.isDepthDataDeliveryEnabled
             let isPortraitEffectsMatteEnabled = self.photoOutput.isPortraitEffectsMatteDeliveryEnabled
             let isSemanticSegmentationMatteEnabled = !self.photoOutput.enabledSemanticSegmentationMatteTypes.isEmpty
-            
-            DispatchQueue.main.async {
-                // Only enable the ability to change camera if the device has more than one camera.
-                self.cameraButton.isEnabled = isSessionRunning && self.videoDeviceDiscoverySession.uniqueDevicePositionsCount > 1
-            }
         }
         keyValueObservations.append(keyValueObservation)
         
