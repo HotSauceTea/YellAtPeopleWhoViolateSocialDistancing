@@ -11,6 +11,8 @@ import CoreVideo
 import MobileCoreServices
 import Accelerate
 import CoreMotion
+import RealityKit
+import ARKit
 
 class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
@@ -104,7 +106,7 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         print("inches: \(DataViewController.chosenInches)")
     }
  
-    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
     return 1.0
 }
     
@@ -146,7 +148,10 @@ extension UIPickerView {
     }
 }
 
-class CameraViewController: UIViewController, ItemSelectionViewControllerDelegate {
+class CameraViewController: UIViewController, ItemSelectionViewControllerDelegate, ARSessionDelegate {
+
+
+    @IBOutlet weak var arView: ARView!
     
     let dataViewController = DataViewController()
     
@@ -165,22 +170,94 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         return view.window?.windowScene?.interfaceOrientation ?? .unknown
     }
     
+    
+    @IBOutlet weak var distanceMethodSegmentedControl: UISegmentedControl!
+    
+    var useARDistanceMethod = true
+    
+
+    @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
+        switch distanceMethodSegmentedControl.selectedSegmentIndex {
+            case 0:
+                self.useARDistanceMethod = true
+                print("switch to AR")
+            case 1:
+                self.useARDistanceMethod = false
+                print("switch to tilt")
+            default:
+                self.useARDistanceMethod = true
+        }
+    }
+    
+    
     var yellingEnabled = false
     @IBAction func pressEnableYelling(_ sender: Any) {
         self.yellingEnabled = true
+        print("yelling enabled")
     }
     
     @IBAction func releaseEnableYelling(_ sender: Any) {
         self.yellingEnabled = false
+        print("yelling disabled")
     }
     
-    private var distanceString = "Distance: ???"
-    private var distance = 1200.0
     let safeDistance = 6 * 12
+    private var distanceString = "Distance: ???"
+    private var distance = 99999.0
+    private var pitch = 0.0 {
+        didSet {
+            self.updateDistance()
+        }
+    }
+    private var ARDistance = 99999.0 {
+        didSet {
+            self.updateDistance()
+        }
+    }
+    
+    func updateDistance() {
+        if self.useARDistanceMethod {
+            self.distance = self.ARDistance
+            print("updated distance b/c AR")
+        } else {
+            self.distance = tan(pitch) * Double(self.dataViewController.getHeight())
+            print("updated distance b/c tilt")
+        }
+        self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
+        print(self.distanceString)
+        DispatchQueue.main.async {
+            self.distanceDisplay.text = self.distanceString
+        }
+        if (Int(self.distance) <= self.safeDistance) {
+            DispatchQueue.main.async {
+                self.distanceDisplay.backgroundColor = UIColor.red
+            }
+            if (!self.synthesizer.isSpeaking) && (self.yellingEnabled) {
+                self.yell()
+            }
+        }  else if (Int(self.distance) > self.safeDistance) {
+            DispatchQueue.main.async {
+                self.distanceDisplay.backgroundColor = UIColor.black
+            }
+        }
+    }
     
     @IBOutlet weak var distanceDisplay: UILabel!
     
     // MARK: View Controller Life Cycle
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.arView.session.delegate = self
+        guard ARBodyTrackingConfiguration.isSupported else {
+            fatalError("This feature is only supported on devices with an A12 chip")
+        }
+
+
+        // Run a body tracking configration.
+        let configuration = ARBodyTrackingConfiguration()
+        arView.session.run(configuration)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,29 +276,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
                  // Make sure the data is valid before accessing it.
                  if let validData = data {
                     // Get the attitude relative to the magnetic north reference frame.
-                    let roll = validData.attitude.roll
-                    let pitch = validData.attitude.pitch
-                    let yaw = validData.attitude.yaw
-                    self.distance = tan(pitch) * Double(self.dataViewController.getHeight())
-                    self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
-                    //print("\(self.distance)")
-                    //print(self.distanceString)
-                    //print("Say This: \(DataViewController.sayThisText)")
-                    DispatchQueue.main.async {
-                        self.distanceDisplay.text = self.distanceString
-                    }
-                    if (Int(self.distance) <= self.safeDistance) {
-                        DispatchQueue.main.async {
-                            self.distanceDisplay.backgroundColor = UIColor.red
-                        }
-                        if (!self.synthesizer.isSpeaking) && (self.yellingEnabled) {
-                            self.yell()
-                        }
-                    }  else if (Int(self.distance) > self.safeDistance) {
-                        DispatchQueue.main.async {
-                            self.distanceDisplay.backgroundColor = UIColor.black
-                        }
-                    }
+                    self.pitch = validData.attitude.pitch
                  }
             })
             print("Device motion started")
@@ -233,7 +288,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         // Disable the UI. Enable the UI later, if and only if the session starts running.
         
         // Set up the video preview view.
-        previewView.session = session
+        //previewView.session = session
         /*
          Check the video authorization status. Video access is required and audio
          access is optional. If the user denies audio access, AVCam won't
@@ -282,11 +337,36 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         DispatchQueue.main.async {
             self.spinner = UIActivityIndicatorView(style: .large)
             self.spinner.color = UIColor.yellow
-            self.previewView.addSubview(self.spinner)
+            self.arView.addSubview(self.spinner)
         }
         DispatchQueue.main.async{
             self.distanceDisplay.text = self.distanceString
         }
+    }
+        
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        var minDistance = 100000.0
+        for anchor in anchors {
+            print("anchor")
+            guard let bodyAnchor = anchor as? ARBodyAnchor else { continue }
+            //guard let sceneView = self.arView as? ARSKView else {
+            //   return
+            //}
+            print("here")
+            // Update the position of the character anchor's position.
+            //let bodyPosition = simd_make_float3(bodyAnchor.transform.columns.3)
+            //let anchorPosition = anchor.transform.columns.3
+            //let cameraPosition = sceneView.session.currentFrame?.camera.transform.columns.3
+            //let cameraToAnchor = cameraPosition - anchorPosition
+            //let distance = length(cameraToAnchor)
+            let distance = Double(simd_distance(bodyAnchor.transform.columns.3, (arView.session.currentFrame?.camera.transform.columns.3)!))
+            if distance < minDistance {
+                minDistance = distance
+            }
+            // Also copy over the rotation of the body anchor, because the skeleton's pose
+            // in the world is relative to the body anchor's rotation.
+        }
+        self.ARDistance = minDistance
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -348,28 +428,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         
         super.viewWillDisappear(animated)
     }
-    
-    override var shouldAutorotate: Bool {
-        // Disable autorotation of the interface when recording is in progress.
-        return true
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        if let videoPreviewLayerConnection = previewView.videoPreviewLayer.connection {
-            let deviceOrientation = UIDevice.current.orientation
-            guard let newVideoOrientation = AVCaptureVideoOrientation(deviceOrientation: deviceOrientation),
-                deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
-                    return
-            }
-            
-            videoPreviewLayerConnection.videoOrientation = newVideoOrientation
-        }
-    }
-    
-    
-    
+
     private enum SessionSetupResult {
         case success
         case notAuthorized
@@ -384,8 +443,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     private let sessionQueue = DispatchQueue(label: "session queue")
     
     private var setupResult: SessionSetupResult = .success
-    
-    private let depthDataOutput = AVCaptureDepthDataOutput()
     
     @objc dynamic var videoDeviceInput: AVCaptureDeviceInput!
     
@@ -443,14 +500,16 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
                      Use the window scene's orientation as the initial video orientation. Subsequent orientation changes are
                      handled by CameraViewController.viewWillTransition(to:with:).
                      */
+                     /* Delete This
                     var initialVideoOrientation: AVCaptureVideoOrientation = .portrait
                     if self.windowOrientation != .unknown {
                         if let videoOrientation = AVCaptureVideoOrientation(interfaceOrientation: self.windowOrientation) {
                             initialVideoOrientation = videoOrientation
                         }
                     }
+                    */
                     
-                    self.previewView.videoPreviewLayer.connection?.videoOrientation = initialVideoOrientation
+                    //self.previewView.videoPreviewLayer.connection?.videoOrientation = initialVideoOrientation
                 }
             } else {
                 print("Couldn't add video device input to the session.")
@@ -465,10 +524,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             return
         }
         
-
-        
-
-        
         // Add an audio input device.
         do {
             let audioDevice = AVCaptureDevice.default(for: .audio)
@@ -482,36 +537,16 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         } catch {
             print("Could not create audio device input: \(error)")
         }
-        
-        // Add the photo output.
-        if session.canAddOutput(photoOutput) {
-            session.addOutput(photoOutput)
-            
-            photoOutput.isHighResolutionCaptureEnabled = true
-            photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
-            photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
-            photoOutput.isPortraitEffectsMatteDeliveryEnabled = photoOutput.isPortraitEffectsMatteDeliverySupported
-            photoOutput.enabledSemanticSegmentationMatteTypes = photoOutput.availableSemanticSegmentationMatteTypes
-            selectedSemanticSegmentationMatteTypes = photoOutput.availableSemanticSegmentationMatteTypes
-            photoOutput.maxPhotoQualityPrioritization = .quality
-            depthDataDeliveryMode = photoOutput.isDepthDataDeliverySupported ? .on : .off
-            photoQualityPrioritizationMode = .balanced
-            
-        } else {
-            print("Could not add photo output to the session")
-            setupResult = .configurationFailed
-            session.commitConfiguration()
-            return
-        }
-        
         session.commitConfiguration()
     }
     
     
     func yell() {
         let utterance = AVSpeechUtterance(string: DataViewController.sayThisText)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Karen-compact")
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        print("Yelling: \(DataViewController.sayThisText)")
+        //utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Fred-compact")
+        //print(utterance.voice)
+        //utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
         self.synthesizer.speak(utterance)
     }
     
@@ -552,13 +587,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     private let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
                                                                                mediaType: .video, position: .unspecified)
     
-
-    
-    @IBAction private func focusAndExposeTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        let devicePoint = previewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
-        focus(with: .autoFocus, exposureMode: .autoExpose, at: devicePoint, monitorSubjectAreaChange: true)
-    }
-    
     private func focus(with focusMode: AVCaptureDevice.FocusMode,
                        exposureMode: AVCaptureDevice.ExposureMode,
                        at devicePoint: CGPoint,
@@ -591,11 +619,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
     }
     
-    // MARK: Capturing Photos
-    
-    private let photoOutput = AVCapturePhotoOutput()
-    
-
     
     private enum DepthDataDeliveryMode {
         case on
@@ -603,8 +626,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     }
 
     private var depthDataDeliveryMode: DepthDataDeliveryMode = .off
-  
-    private var photoQualityPrioritizationMode: AVCapturePhotoOutput.QualityPrioritization = .speed
         
     // MARK: ItemSelectionViewControllerDelegate
     
@@ -640,11 +661,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     /// - Tag: ObserveInterruption
     private func addObservers() {
         let keyValueObservation = session.observe(\.isRunning, options: .new) { _, change in
-            guard let isSessionRunning = change.newValue else { return }
-            let isLivePhotoCaptureEnabled = self.photoOutput.isLivePhotoCaptureEnabled
-            let isDepthDeliveryDataEnabled = self.photoOutput.isDepthDataDeliveryEnabled
-            let isPortraitEffectsMatteEnabled = self.photoOutput.isPortraitEffectsMatteDeliveryEnabled
-            let isSemanticSegmentationMatteEnabled = !self.photoOutput.enabledSemanticSegmentationMatteTypes.isEmpty
+            guard change.newValue != nil else { return }
         }
         keyValueObservations.append(keyValueObservation)
         
@@ -737,7 +754,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     
     /// - Tag: HandleInterruption
     @objc
-    func sessionWasInterrupted(notification: NSNotification) {
+    private func sessionWasInterrupted(notification: NSNotification) {
         /*
          In some scenarios you want to enable the user to resume the session.
          For example, if music playback is initiated from Control Center while
@@ -768,7 +785,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     }
     
     @objc
-    func sessionInterruptionEnded(notification: NSNotification) {
+    private func sessionInterruptionEnded(notification: NSNotification) {
         print("Capture session interruption ended")
         
         if !cameraUnavailableLabel.isHidden {

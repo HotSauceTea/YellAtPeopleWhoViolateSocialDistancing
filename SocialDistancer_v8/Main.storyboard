@@ -20,46 +20,76 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eR-Rn-XpZ" userLabel="Preview" customClass="PreviewView" customModule="SocialDistancer_v8" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENH-f8-djg">
-                                        <rect key="frame" x="258" y="25" width="77" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ua-7c-RTp">
+                                        <rect key="frame" x="0.0" y="37" width="224" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="224" id="FNs-SU-mbF"/>
+                                            <constraint firstAttribute="height" constant="48" id="VS2-Zd-F8I"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENH-f8-djg">
+                                        <rect key="frame" x="222" y="25" width="77" height="30"/>
                                         <state key="normal" title="Setup Data">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" systemColor="systemYellowColor"/>
                                         </state>
                                         <connections>
                                             <segue destination="KAu-ET-dkn" kind="show" id="vrA-KV-gWp"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ua-7c-RTp">
-                                        <rect key="frame" x="36" y="37" width="175" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PTV-7R-OGE">
-                                        <rect key="frame" x="137" y="707" width="101" height="63"/>
-                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal">
-                                            <string key="title">Enable 
+                                    <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgB-gS-Y36">
+                                        <rect key="frame" x="0.0" y="79" width="375" height="619"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="619" id="2rg-ha-2jN"/>
+                                        </constraints>
+                                    </arView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cgW-py-Z9k">
+                                        <rect key="frame" x="63" y="698" width="249" height="94"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bra-7h-0co">
+                                                <rect key="frame" x="0.0" y="0.0" width="249" height="32"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <segments>
+                                                    <segment title="Use AR Distance"/>
+                                                    <segment title="Use Tilt Distance"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="distanceMethodSegmentedControlUpdate:" destination="BYZ-38-t0r" eventType="valueChanged" id="3Z2-Sh-pUr"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PTV-7R-OGE">
+                                                <rect key="frame" x="0.0" y="31" width="249" height="63"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <string key="title">Enable 
 Yelling</string>
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="pressEnableYelling:" destination="BYZ-38-t0r" eventType="touchDown" id="e2G-uf-3Di"/>
-                                            <action selector="releaseEnableYelling:" destination="BYZ-38-t0r" eventType="touchUpInside" id="byQ-uA-bIg"/>
-                                        </connections>
-                                    </button>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pressEnableYelling:" destination="BYZ-38-t0r" eventType="touchDown" id="e2G-uf-3Di"/>
+                                                    <action selector="releaseEnableYelling:" destination="BYZ-38-t0r" eventType="touchUpInside" id="byQ-uA-bIg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="PTV-7R-OGE" firstAttribute="leading" secondItem="3eR-Rn-XpZ" secondAttribute="leading" constant="137" id="9kE-BV-Nab"/>
-                                    <constraint firstAttribute="bottom" secondItem="PTV-7R-OGE" secondAttribute="bottom" constant="42" id="A27-3y-Mjq"/>
-                                    <constraint firstAttribute="trailing" secondItem="PTV-7R-OGE" secondAttribute="trailing" constant="137" id="IJS-pg-1UW"/>
-                                    <constraint firstItem="PTV-7R-OGE" firstAttribute="centerX" secondItem="3eR-Rn-XpZ" secondAttribute="centerX" id="PFD-WP-GX1"/>
+                                    <constraint firstItem="dgB-gS-Y36" firstAttribute="centerX" secondItem="3eR-Rn-XpZ" secondAttribute="centerX" id="2rS-0d-A9a"/>
+                                    <constraint firstItem="cgW-py-Z9k" firstAttribute="centerX" secondItem="3eR-Rn-XpZ" secondAttribute="centerX" id="Aub-7L-P8O"/>
+                                    <constraint firstItem="cgW-py-Z9k" firstAttribute="top" secondItem="dgB-gS-Y36" secondAttribute="bottom" id="CmW-Qa-TFl"/>
+                                    <constraint firstItem="6ua-7c-RTp" firstAttribute="top" secondItem="3eR-Rn-XpZ" secondAttribute="top" constant="37" id="Dit-ZQ-8Iw"/>
+                                    <constraint firstItem="dgB-gS-Y36" firstAttribute="leading" secondItem="6ua-7c-RTp" secondAttribute="leading" id="NOr-J3-I8X"/>
+                                    <constraint firstItem="ENH-f8-djg" firstAttribute="leading" secondItem="6ua-7c-RTp" secondAttribute="trailing" constant="-2" id="bmS-GQ-Xzl"/>
+                                    <constraint firstItem="dgB-gS-Y36" firstAttribute="top" secondItem="ENH-f8-djg" secondAttribute="bottom" constant="24" id="iq9-zY-Voc"/>
+                                    <constraint firstItem="dgB-gS-Y36" firstAttribute="centerX" secondItem="3eR-Rn-XpZ" secondAttribute="centerX" id="r0D-Rv-G6X"/>
+                                    <constraint firstAttribute="bottom" secondItem="cgW-py-Z9k" secondAttribute="bottom" constant="20" id="sdc-ad-reo"/>
+                                    <constraint firstItem="6ua-7c-RTp" firstAttribute="leading" secondItem="3eR-Rn-XpZ" secondAttribute="leading" id="zTw-j2-pAV"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="fY6-qX-ntV" appends="YES" id="G6D-dx-xU8"/>
@@ -72,7 +102,7 @@ Yelling</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0F-YQ-IgM" userLabel="Target">
-                                <rect key="frame" x="181.33333333333334" y="393.33333333333331" width="12.333333333333343" height="25.333333333333314"/>
+                                <rect key="frame" x="181.33333333333334" y="393.33333333333331" width="12.666666666666657" height="25.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -93,8 +123,10 @@ Yelling</string>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="arView" destination="dgB-gS-Y36" id="aMt-kJ-duc"/>
                         <outlet property="cameraUnavailableLabel" destination="zf0-db-esM" id="P9W-lb-Pb8"/>
                         <outlet property="distanceDisplay" destination="6ua-7c-RTp" id="VBD-ow-fnN"/>
+                        <outlet property="distanceMethodSegmentedControl" destination="bra-7h-0co" id="m27-uW-ZPk"/>
                         <outlet property="previewView" destination="3eR-Rn-XpZ" id="e7I-nu-L6j"/>
                     </connections>
                 </viewController>
@@ -167,7 +199,7 @@ Yelling</string>
                                         <rect key="frame" x="0.0" y="229.66666666666669" width="321.66666666666669" height="216"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="aPQ-BQ-9qC" userLabel="Height Picker">
-                                                <rect key="frame" x="0.0" y="0.0" width="321" height="216"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="216"/>
                                             </pickerView>
                                         </subviews>
                                     </stackView>
@@ -211,6 +243,9 @@ Yelling</string>
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

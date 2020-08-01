@@ -14,10 +14,10 @@
             filePath = "SocialDistancer_v8/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "595"
-            endingLineNumber = "595"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "624"
+            endingLineNumber = "624"
+            landmarkName = "DepthDataDeliveryMode"
+            landmarkType = "13">
             <Locations>
                <Location
                   uuid = "31257048-DC77-490B-AE0D-3D9CF17FE44C - 6c643a2f7f2ee1a9"
@@ -62,10 +62,10 @@
             filePath = "SocialDistancer_v8/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "624"
-            endingLineNumber = "624"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "651"
+            endingLineNumber = "651"
+            landmarkName = "CameraViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
