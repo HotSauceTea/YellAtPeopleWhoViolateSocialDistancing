@@ -218,13 +218,13 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     func updateDistance() {
         if self.useARDistanceMethod {
             self.distance = self.ARDistance
-            print("updated distance b/c AR")
+            //print("updated distance b/c AR")
         } else {
             self.distance = tan(pitch) * Double(self.dataViewController.getHeight())
-            print("updated distance b/c tilt")
+            //print("updated distance b/c tilt")
         }
         self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
-        print(self.distanceString)
+        //print(self.distanceString)
         DispatchQueue.main.async {
             self.distanceDisplay.text = self.distanceString
         }
@@ -342,6 +342,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         DispatchQueue.main.async{
             self.distanceDisplay.text = self.distanceString
         }
+        print("finished viewdidload")
     }
         
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
@@ -377,8 +378,8 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             case .success:
                 // Only setup observers and start the session if setup succeeded.
                 self.addObservers()
-                self.session.startRunning()
-                self.isSessionRunning = self.session.isRunning
+                self.captureSession.startRunning()
+                self.isSessionRunning = self.captureSession.isRunning
                 
             case .notAuthorized:
                 DispatchQueue.main.async {
@@ -415,13 +416,14 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
                 }
             }
         }
+        print("finished viewwillappear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         sessionQueue.async {
             if self.setupResult == .success {
-                self.session.stopRunning()
-                self.isSessionRunning = self.session.isRunning
+                self.captureSession.stopRunning()
+                self.isSessionRunning = self.captureSession.isRunning
                 self.removeObservers()
             }
         }
@@ -435,7 +437,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         case configurationFailed
     }
     
-    private let session = AVCaptureSession()
+    private let captureSession = AVCaptureSession()
     private var isSessionRunning = false
     private var selectedSemanticSegmentationMatteTypes = [AVSemanticSegmentationMatte.MatteType]()
     
@@ -456,13 +458,13 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             return
         }
         
-        session.beginConfiguration()
+        captureSession.beginConfiguration()
         
         /*
          Do not create an AVCaptureMovieFileOutput when setting up the session because
          Live Photo is not supported when AVCaptureMovieFileOutput is added to the session.
          */
-        session.sessionPreset = .photo
+        captureSession.sessionPreset = .photo
         
         // Add video input.
         do {
@@ -481,13 +483,13 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             guard let videoDevice = defaultVideoDevice else {
                 print("Default video device is unavailable.")
                 setupResult = .configurationFailed
-                session.commitConfiguration()
+                captureSession.commitConfiguration()
                 return
             }
             let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
             
-            if session.canAddInput(videoDeviceInput) {
-                session.addInput(videoDeviceInput)
+            if captureSession.canAddInput(videoDeviceInput) {
+                captureSession.addInput(videoDeviceInput)
                 self.videoDeviceInput = videoDeviceInput
                 
                 DispatchQueue.main.async {
@@ -514,13 +516,13 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             } else {
                 print("Couldn't add video device input to the session.")
                 setupResult = .configurationFailed
-                session.commitConfiguration()
+                captureSession.commitConfiguration()
                 return
             }
         } catch {
             print("Couldn't create video device input: \(error)")
             setupResult = .configurationFailed
-            session.commitConfiguration()
+            captureSession.commitConfiguration()
             return
         }
         
@@ -529,8 +531,8 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             let audioDevice = AVCaptureDevice.default(for: .audio)
             let audioDeviceInput = try AVCaptureDeviceInput(device: audioDevice!)
             
-            if session.canAddInput(audioDeviceInput) {
-                session.addInput(audioDeviceInput)
+            if captureSession.canAddInput(audioDeviceInput) {
+                captureSession.addInput(audioDeviceInput)
             } else {
                 print("Could not add audio device input to the session")
             }
@@ -539,25 +541,21 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
         
         // Add the photo output.
-        if session.canAddOutput(photoOutput) {
-            session.addOutput(photoOutput)
+        if captureSession.canAddOutput(photoOutput) {
+            captureSession.addOutput(photoOutput)
             print("can add photo output")
             photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
-            photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
-            photoOutput.isPortraitEffectsMatteDeliveryEnabled = photoOutput.isPortraitEffectsMatteDeliverySupported
-            photoOutput.enabledSemanticSegmentationMatteTypes = photoOutput.availableSemanticSegmentationMatteTypes
-            selectedSemanticSegmentationMatteTypes = photoOutput.availableSemanticSegmentationMatteTypes
-            photoOutput.maxPhotoQualityPrioritization = .quality
-            depthDataDeliveryMode = photoOutput.isDepthDataDeliverySupported ? .on : .off
+
             //photoQualityPrioritizationMode = .balanced
             
         } else {
             print("Could not add photo output to the session")
             setupResult = .configurationFailed
-            session.commitConfiguration()
+            captureSession.commitConfiguration()
             return
         }
-        session.commitConfiguration()
+        captureSession.commitConfiguration()
+        print("finished configuring session")
     }
     
     
@@ -579,9 +577,10 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
              only try to restart the session in the error handler if you aren't
              trying to resume the session.
              */
-            self.session.startRunning()
-            self.isSessionRunning = self.session.isRunning
-            if !self.session.isRunning {
+            print("resuming")
+            self.captureSession.startRunning()
+            self.isSessionRunning = self.captureSession.isRunning
+            if !self.captureSession.isRunning {
                 DispatchQueue.main.async {
                     let message = NSLocalizedString("Unable to resume", comment: "Alert message when unable to resume the session running")
                     let alertController = UIAlertController(title: "AVCam", message: message, preferredStyle: .alert)
@@ -591,6 +590,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
                 }
             } else {
             }
+            print("finished resume")
         }
     }
     
@@ -681,7 +681,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     private var keyValueObservations = [NSKeyValueObservation]()
     /// - Tag: ObserveInterruption
     private func addObservers() {
-        let keyValueObservation = session.observe(\.isRunning, options: .new) { _, change in
+        let keyValueObservation = captureSession.observe(\.isRunning, options: .new) { _, change in
             guard change.newValue != nil else { return }
         }
         keyValueObservations.append(keyValueObservation)
@@ -691,7 +691,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             self.setRecommendedFrameRateRangeForPressureState(systemPressureState: systemPressureState)
         }
         keyValueObservations.append(systemPressureStateObservation)
-        
+        /*
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(subjectAreaDidChange),
                                                name: .AVCaptureDeviceSubjectAreaDidChange,
@@ -701,7 +701,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
                                                selector: #selector(sessionRuntimeError),
                                                name: .AVCaptureSessionRuntimeError,
                                                object: session)
-        
+        */
         /*
          A session can only run when the app is full screen. It will be interrupted
          in a multi-app layout, introduced in iOS 9, see also the documentation of
@@ -744,8 +744,8 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         if error.code == .mediaServicesWereReset {
             sessionQueue.async {
                 if self.isSessionRunning {
-                    self.session.startRunning()
-                    self.isSessionRunning = self.session.isRunning
+                    self.captureSession.startRunning()
+                    self.isSessionRunning = self.captureSession.isRunning
                 }
             }
         }
@@ -774,6 +774,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     }
     
     /// - Tag: HandleInterruption
+    
     @objc
     private func sessionWasInterrupted(notification: NSNotification) {
         /*
@@ -784,6 +785,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
          music playback in Control Center will not automatically resume the session.
          Also note that it's not always possible to resume, see `resumeInterruptedSession(_:)`.
          */
+         
         if let userInfoValue = notification.userInfo?[AVCaptureSessionInterruptionReasonKey] as AnyObject?,
             let reasonIntegerValue = userInfoValue.integerValue,
             let reason = AVCaptureSession.InterruptionReason(rawValue: reasonIntegerValue) {

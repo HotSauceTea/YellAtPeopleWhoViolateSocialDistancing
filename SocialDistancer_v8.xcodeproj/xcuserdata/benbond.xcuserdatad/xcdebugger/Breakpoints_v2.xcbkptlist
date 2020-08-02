@@ -14,8 +14,8 @@
             filePath = "SocialDistancer_v8/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "653"
-            endingLineNumber = "653"
+            startingLineNumber = "661"
+            endingLineNumber = "661"
             landmarkName = "CameraViewController"
             landmarkType = "3">
             <Locations>
@@ -62,10 +62,10 @@
             filePath = "SocialDistancer_v8/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "680"
-            endingLineNumber = "680"
-            landmarkName = "CameraViewController"
-            landmarkType = "3">
+            startingLineNumber = "686"
+            endingLineNumber = "686"
+            landmarkName = "addObservers()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
