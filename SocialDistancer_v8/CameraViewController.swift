@@ -106,7 +106,7 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         print("inches: \(DataViewController.chosenInches)")
     }
  
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
     return 1.0
 }
     
@@ -177,6 +177,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     
 
     @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
+        print("here")
         switch distanceMethodSegmentedControl.selectedSegmentIndex {
             case 0:
                 self.useARDistanceMethod = true
@@ -189,16 +190,15 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
     }
     
-    
     var yellingEnabled = false
     @IBAction func pressEnableYelling(_ sender: Any) {
         self.yellingEnabled = true
-        print("yelling enabled")
+        
     }
     
     @IBAction func releaseEnableYelling(_ sender: Any) {
         self.yellingEnabled = false
-        print("yelling disabled")
+        self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
     
     let safeDistance = 6 * 12
@@ -541,8 +541,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         // Add the photo output.
         if session.canAddOutput(photoOutput) {
             session.addOutput(photoOutput)
-            
-            photoOutput.isHighResolutionCaptureEnabled = true
+            print("can add photo output")
             photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
             photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
             photoOutput.isPortraitEffectsMatteDeliveryEnabled = photoOutput.isPortraitEffectsMatteDeliverySupported
