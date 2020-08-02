@@ -537,6 +537,27 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         } catch {
             print("Could not create audio device input: \(error)")
         }
+        
+        // Add the photo output.
+        if session.canAddOutput(photoOutput) {
+            session.addOutput(photoOutput)
+            
+            photoOutput.isHighResolutionCaptureEnabled = true
+            photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
+            photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
+            photoOutput.isPortraitEffectsMatteDeliveryEnabled = photoOutput.isPortraitEffectsMatteDeliverySupported
+            photoOutput.enabledSemanticSegmentationMatteTypes = photoOutput.availableSemanticSegmentationMatteTypes
+            selectedSemanticSegmentationMatteTypes = photoOutput.availableSemanticSegmentationMatteTypes
+            photoOutput.maxPhotoQualityPrioritization = .quality
+            depthDataDeliveryMode = photoOutput.isDepthDataDeliverySupported ? .on : .off
+            //photoQualityPrioritizationMode = .balanced
+            
+        } else {
+            print("Could not add photo output to the session")
+            setupResult = .configurationFailed
+            session.commitConfiguration()
+            return
+        }
         session.commitConfiguration()
     }
     
@@ -619,6 +640,7 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
     }
     
+    private let photoOutput = AVCapturePhotoOutput()
     
     private enum DepthDataDeliveryMode {
         case on
