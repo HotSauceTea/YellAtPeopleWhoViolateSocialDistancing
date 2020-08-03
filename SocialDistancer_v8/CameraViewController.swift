@@ -261,6 +261,12 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("uh oh, audio went wrong")
+        }
         
         // Ensure to keep a strong reference to the motion manager otherwise you won't get updates
         
@@ -331,9 +337,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
          take a long time. Dispatch session setup to the sessionQueue, so
          that the main queue isn't blocked, which keeps the UI responsive.
          */
-        sessionQueue.async {
-            self.configureSession()
-        }
         DispatchQueue.main.async {
             self.spinner = UIActivityIndicatorView(style: .large)
             self.spinner.color = UIColor.yellow
@@ -449,114 +452,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     @objc dynamic var videoDeviceInput: AVCaptureDeviceInput!
     
     @IBOutlet private weak var previewView: PreviewView!
-    
-    
-    // Call this on the session queue.
-    /// - Tag: ConfigureSession
-    private func configureSession() {
-        if setupResult != .success {
-            return
-        }
-        
-        captureSession.beginConfiguration()
-        
-        /*
-         Do not create an AVCaptureMovieFileOutput when setting up the session because
-         Live Photo is not supported when AVCaptureMovieFileOutput is added to the session.
-         */
-        captureSession.sessionPreset = .photo
-        
-        // Add video input.
-        do {
-            var defaultVideoDevice: AVCaptureDevice?
-            
-            // Choose the back dual camera, if available, otherwise default to a wide angle camera.
-            if let dualCameraDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
-                defaultVideoDevice = dualCameraDevice
-            } else if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
-                // If a rear dual camera is not available, default to the rear wide angle camera.
-                defaultVideoDevice = backCameraDevice
-            } else if let frontCameraDevice = AVCaptureDevice.default(.builtInTrueDepthCamera, for: .video, position: .front) {
-                // If the rear wide angle camera isn't available, default to the front wide angle camera.
-                defaultVideoDevice = frontCameraDevice
-            }
-            guard let videoDevice = defaultVideoDevice else {
-                print("Default video device is unavailable.")
-                setupResult = .configurationFailed
-                captureSession.commitConfiguration()
-                return
-            }
-            let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-            
-            if captureSession.canAddInput(videoDeviceInput) {
-                captureSession.addInput(videoDeviceInput)
-                self.videoDeviceInput = videoDeviceInput
-                
-                DispatchQueue.main.async {
-                    /*
-                     Dispatch video streaming to the main queue because AVCaptureVideoPreviewLayer is the backing layer for PreviewView.
-                     You can manipulate UIView only on the main thread.
-                     Note: As an exception to the above rule, it's not necessary to serialize video orientation changes
-                     on the AVCaptureVideoPreviewLayer’s connection with other session manipulation.
-                     
-                     Use the window scene's orientation as the initial video orientation. Subsequent orientation changes are
-                     handled by CameraViewController.viewWillTransition(to:with:).
-                     */
-                     /* Delete This
-                    var initialVideoOrientation: AVCaptureVideoOrientation = .portrait
-                    if self.windowOrientation != .unknown {
-                        if let videoOrientation = AVCaptureVideoOrientation(interfaceOrientation: self.windowOrientation) {
-                            initialVideoOrientation = videoOrientation
-                        }
-                    }
-                    */
-                    
-                    //self.previewView.videoPreviewLayer.connection?.videoOrientation = initialVideoOrientation
-                }
-            } else {
-                print("Couldn't add video device input to the session.")
-                setupResult = .configurationFailed
-                captureSession.commitConfiguration()
-                return
-            }
-        } catch {
-            print("Couldn't create video device input: \(error)")
-            setupResult = .configurationFailed
-            captureSession.commitConfiguration()
-            return
-        }
-        
-        // Add an audio input device.
-        do {
-            let audioDevice = AVCaptureDevice.default(for: .audio)
-            let audioDeviceInput = try AVCaptureDeviceInput(device: audioDevice!)
-            
-            if captureSession.canAddInput(audioDeviceInput) {
-                captureSession.addInput(audioDeviceInput)
-            } else {
-                print("Could not add audio device input to the session")
-            }
-        } catch {
-            print("Could not create audio device input: \(error)")
-        }
-        
-        // Add the photo output.
-        if captureSession.canAddOutput(photoOutput) {
-            captureSession.addOutput(photoOutput)
-            print("can add photo output")
-            photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
-
-            //photoQualityPrioritizationMode = .balanced
-            
-        } else {
-            print("Could not add photo output to the session")
-            setupResult = .configurationFailed
-            captureSession.commitConfiguration()
-            return
-        }
-        captureSession.commitConfiguration()
-        print("finished configuring session")
-    }
     
     
     func yell() {
