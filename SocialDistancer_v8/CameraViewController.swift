@@ -148,8 +148,7 @@ extension UIPickerView {
     }
 }
 
-class CameraViewController: UIViewController, ItemSelectionViewControllerDelegate, ARSessionDelegate {
-
+class CameraViewController: UIViewController, ARSessionDelegate {
 
     @IBOutlet weak var arView: ARView!
     
@@ -174,7 +173,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
     @IBOutlet weak var distanceMethodSegmentedControl: UISegmentedControl!
     
     var useARDistanceMethod = true
-    
 
     @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
         print("here")
@@ -489,11 +487,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
     }
     
-    private enum CaptureMode: Int {
-        case photo = 0
-        case movie = 1
-    }
-    
     // MARK: Device Configuration
     
     
@@ -533,45 +526,6 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
             }
         }
     }
-    
-    private let photoOutput = AVCapturePhotoOutput()
-    
-    private enum DepthDataDeliveryMode {
-        case on
-        case off
-    }
-
-    private var depthDataDeliveryMode: DepthDataDeliveryMode = .off
-        
-    // MARK: ItemSelectionViewControllerDelegate
-    
-    let semanticSegmentationTypeItemSelectionIdentifier = "SemanticSegmentationTypes"
-    
-    private func presentItemSelectionViewController(_ itemSelectionViewController: ItemSelectionViewController) {
-        let navigationController = UINavigationController(rootViewController: itemSelectionViewController)
-        navigationController.navigationBar.barTintColor = .black
-        navigationController.navigationBar.tintColor = view.tintColor
-        present(navigationController, animated: true, completion: nil)
-    }
-    
-    func itemSelectionViewController(_ itemSelectionViewController: ItemSelectionViewController,
-                                     didFinishSelectingItems selectedItems: [AVSemanticSegmentationMatte.MatteType]) {
-        let identifier = itemSelectionViewController.identifier
-        
-        if identifier == semanticSegmentationTypeItemSelectionIdentifier {
-            sessionQueue.async {
-                self.selectedSemanticSegmentationMatteTypes = selectedItems
-            }
-        }
-    }
-    
-    private var inProgressLivePhotoCapturesCount = 0
-    
-    @IBOutlet var capturingLivePhotoLabel: UILabel!
-    
-    // MARK: Recording Movies
-    
-    // MARK: KVO and Notifications
     
     private var keyValueObservations = [NSKeyValueObservation]()
     /// - Tag: ObserveInterruption
@@ -717,39 +671,3 @@ class CameraViewController: UIViewController, ItemSelectionViewControllerDelegat
         }
     }
 }
-
-extension AVCaptureVideoOrientation {
-    init?(deviceOrientation: UIDeviceOrientation) {
-        switch deviceOrientation {
-        case .portrait: self = .portrait
-        case .portraitUpsideDown: self = .portraitUpsideDown
-        case .landscapeLeft: self = .landscapeRight
-        case .landscapeRight: self = .landscapeLeft
-        default: return nil
-        }
-    }
-    
-    init?(interfaceOrientation: UIInterfaceOrientation) {
-        switch interfaceOrientation {
-        case .portrait: self = .portrait
-        case .portraitUpsideDown: self = .portraitUpsideDown
-        case .landscapeLeft: self = .landscapeLeft
-        case .landscapeRight: self = .landscapeRight
-        default: return nil
-        }
-    }
-}
-
-extension AVCaptureDevice.DiscoverySession {
-    var uniqueDevicePositionsCount: Int {
-        
-        var uniqueDevicePositions = [AVCaptureDevice.Position]()
-        
-        for device in devices where !uniqueDevicePositions.contains(device.position) {
-            uniqueDevicePositions.append(device.position)
-        }
-        
-        return uniqueDevicePositions.count
-    }
-}
-
