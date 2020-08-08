@@ -1,0 +1,6 @@
+framework module Pods_YellAtPeopleWhoViolateSocialDistancing {
+  umbrella header "Pods-YellAtPeopleWhoViolateSocialDistancing-umbrella.h"
+
+  export *
+  module * { export * }
+}
