@@ -13,6 +13,7 @@ import Accelerate
 import CoreMotion
 import RealityKit
 import ARKit
+import GoogleMobileAds
 
 class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
@@ -23,6 +24,18 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
     static let shoulderBodyProportion = 0.82
     static var useHumanHeight = true
     let heightLabel = UILabel()
+    var bannerView: GADBannerView!
+    static var adsEnabled = true
+    
+    @IBOutlet var adsSwitchButton: UISwitch!
+    @IBAction func adToggle(_ sender: Any) {
+        if (sender as AnyObject).isOn {
+            DataViewController.adsEnabled = true
+            self.doAdStuff()
+        } else {
+            DataViewController.adsEnabled = false
+        }
+    }
     
     @IBOutlet weak var segmentedControlButton: UISegmentedControl!
     
@@ -43,10 +56,15 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var goBack: UIButton!
 
     @IBOutlet weak var sayThisTextField: UITextField!
-    static var sayThisText = "Oh no! Violating Social Distancing!"
+    static var sayThisText = "please stay six feet away. and please wear a mask to hide your ugly face"
     
+
     @IBAction func goBack(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    @IBAction func textFieldChanged(_ sender: UITextField) {
+        DataViewController.sayThisText = self.sayThisTextField.text ?? ""
+        print(DataViewController.sayThisText)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -55,8 +73,14 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         return true
     }
     
+    @IBOutlet var enableAdsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        adsSwitchButton.isOn = DataViewController.adsEnabled
+        /*
+        adsSwitchButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for:.horizontal)
+        enableAdsLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for:.horizontal)
+        */
         self.heightPicker.delegate = self
         self.heightPicker.dataSource = self
         self.sayThisTextField.delegate = self
@@ -72,12 +96,43 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         } else {
             segmentedControlButton.selectedSegmentIndex = 1
         }
-        print("DataViewController.chosenRow: \(DataViewController.chosenRow)")
         self.heightPicker.selectRow(DataViewController.chosenRow, inComponent: 0, animated: false)
         self.heightLabel.text = "Height:"
         
         self.heightPicker.setPickerLabels(labels: [0: self.heightLabel], containedView: heightStackView)
+        if DataViewController.adsEnabled {
+            self.doAdStuff()
+        }
     }
+    
+    func doAdStuff() {
+        self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        addBannerViewToView(self.bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                          attribute: .bottom,
+                          relatedBy: .equal,
+                          toItem: bottomLayoutGuide,
+                          attribute: .top,
+                          multiplier: 1,
+                          constant: 0),
+            NSLayoutConstraint(item: bannerView,
+                          attribute: .centerX,
+                          relatedBy: .equal,
+                          toItem: view,
+                          attribute: .centerX,
+                          multiplier: 1,
+                          constant: 0)
+        ])
+   }
     
     // Number of columns of data
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -120,6 +175,7 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         return height
     }
+
 }
 
 extension UIPickerView {
@@ -137,7 +193,7 @@ extension UIPickerView {
                     label.removeFromSuperview()
                 }
                 
-                label.frame = CGRect(x: x + labelWidth * CGFloat(i), y: y, width: labelWidth, height: fontSize)
+                label.frame = CGRect(x: x + labelWidth * CGFloat(i), y: y + fontSize * 1.5, width: labelWidth, height: fontSize)
                 label.font = UIFont.boldSystemFont(ofSize: fontSize)
                 label.backgroundColor = .clear
                 label.textAlignment = NSTextAlignment.left
@@ -169,6 +225,7 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         return view.window?.windowScene?.interfaceOrientation ?? .unknown
     }
     
+    var ARSupported = true
     
     @IBOutlet weak var distanceMethodSegmentedControl: UISegmentedControl!
     
@@ -176,15 +233,20 @@ class CameraViewController: UIViewController, ARSessionDelegate {
 
     @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
         print("here")
-        switch distanceMethodSegmentedControl.selectedSegmentIndex {
-            case 0:
-                self.useARDistanceMethod = true
-                print("switch to AR")
-            case 1:
-                self.useARDistanceMethod = false
-                print("switch to tilt")
-            default:
-                self.useARDistanceMethod = true
+        if self.ARSupported {
+            switch distanceMethodSegmentedControl.selectedSegmentIndex {
+                case 0:
+                    self.useARDistanceMethod = true
+                    print("switch to AR")
+                case 1:
+                    self.useARDistanceMethod = false
+                    print("switch to trig")
+                default:
+                    self.useARDistanceMethod = true
+            }
+        } else {
+            distanceMethodSegmentedControl.selectedSegmentIndex = 1
+            self.useARDistanceMethod = false
         }
     }
     
@@ -219,10 +281,16 @@ class CameraViewController: UIViewController, ARSessionDelegate {
             //print("updated distance b/c AR")
         } else {
             self.distance = tan(pitch) * Double(self.dataViewController.getHeight())
-            //print("updated distance b/c tilt")
+            //print("updated distance b/c trig")
         }
-        self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
-        //print(self.distanceString)
+        if self.distance < 0 {
+            self.distanceString = "Distance: ???"
+        } else if self.distance > 1200{
+            self.distanceString = "Distance: N/A"
+        } else {
+            self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
+        }
+        print(self.distanceString)
         DispatchQueue.main.async {
             self.distanceDisplay.text = self.distanceString
         }
@@ -242,23 +310,31 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     
     @IBOutlet weak var distanceDisplay: UILabel!
     
+    
+    
     // MARK: View Controller Life Cycle
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.arView.session.delegate = self
-        guard ARBodyTrackingConfiguration.isSupported else {
-            fatalError("This feature is only supported on devices with an A12 chip")
-        }
+        self.ARSupported = ARBodyTrackingConfiguration.isSupported
+        //self.ARSupported = false
 
 
         // Run a body tracking configration.
-        let configuration = ARBodyTrackingConfiguration()
-        arView.session.run(configuration)
+        if self.ARSupported {
+            let configuration = ARBodyTrackingConfiguration()
+            arView.session.run(configuration)
+        } else {
+            let configuration = ARWorldTrackingConfiguration()
+            arView.session.run(configuration)
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ARSupported = false
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -269,6 +345,13 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         // Ensure to keep a strong reference to the motion manager otherwise you won't get updates
         
         print(motionManager.isDeviceMotionAvailable)
+        if ARSupported {
+            distanceMethodSegmentedControl.selectedSegmentIndex = 0
+            self.useARDistanceMethod = true
+        } else {
+            distanceMethodSegmentedControl.selectedSegmentIndex = 1
+            self.useARDistanceMethod = false
+        }
         motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
         if motionManager.isDeviceMotionAvailable == true {
 
@@ -348,27 +431,41 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         var minDistance = 100000.0
-        for anchor in anchors {
-            print("anchor")
-            guard let bodyAnchor = anchor as? ARBodyAnchor else { continue }
-            //guard let sceneView = self.arView as? ARSKView else {
-            //   return
-            //}
-            print("here")
-            // Update the position of the character anchor's position.
-            //let bodyPosition = simd_make_float3(bodyAnchor.transform.columns.3)
-            //let anchorPosition = anchor.transform.columns.3
-            //let cameraPosition = sceneView.session.currentFrame?.camera.transform.columns.3
-            //let cameraToAnchor = cameraPosition - anchorPosition
-            //let distance = length(cameraToAnchor)
-            let distance = Double(simd_distance(bodyAnchor.transform.columns.3, (arView.session.currentFrame?.camera.transform.columns.3)!))
-            if distance < minDistance {
-                minDistance = distance
+        if self.ARSupported {
+            for anchor in anchors {
+                print("anchor")
+                guard let bodyAnchor = anchor as? ARBodyAnchor else { continue }
+                //guard let sceneView = self.arView as? ARSKView else {
+                //   return
+                //}
+                print("here")
+                // Update the position of the character anchor's position.
+                //let bodyPosition = simd_make_float3(bodyAnchor.transform.columns.3)
+                //let anchorPosition = anchor.transform.columns.3
+                //let cameraPosition = sceneView.session.currentFrame?.camera.transform.columns.3
+                //let cameraToAnchor = cameraPosition - anchorPosition
+                //let distance = length(cameraToAnchor)
+                //let distance = Double(simd_distance(bodyAnchor.transform.columns.3, (arView.session.currentFrame?.camera.transform.columns.3)!))
+                let zDistance = Double(abs(bodyAnchor.transform.columns.3.z - (arView.session.currentFrame?.camera.transform.columns.3.z)!))
+                let xDistance = Double(abs(bodyAnchor.transform.columns.3.x - (arView.session.currentFrame?.camera.transform.columns.3.x)!))
+                let distance = sqrt(pow(xDistance, 2) + pow(zDistance, 2))
+                print("body anchor \(bodyAnchor.transform.columns.3)")
+                print("camera position \(arView.session.currentFrame?.camera.transform.columns.3)!)")
+                print("distance: \(distance)")
+                print("zDistance \(zDistance)")
+                //let bodyAnchorVec = bodyAnchor.transform.columns
+                //let cameraVec = arView.session.currentFrame?.camera.transform.columns
+                //let xx = Double(bodyAnchorVec.1)
+                //var distance = pow(bodyAnchorVec.1 - cameraVec!.1,2) + pow(bodyAnchorVec.z - cameraVec.z!,2)
+                //distance = sqrt(distance)
+                if distance < minDistance {
+                    minDistance = distance
+                }
+                // Also copy over the rotation of the body anchor, because the skeleton's pose
+                // in the world is relative to the body anchor's rotation.
             }
-            // Also copy over the rotation of the body anchor, because the skeleton's pose
-            // in the world is relative to the body anchor's rotation.
         }
-        self.ARDistance = minDistance
+        self.ARDistance = minDistance * 39.3701 //convert meters to inches
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -440,7 +537,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     
     private let captureSession = AVCaptureSession()
     private var isSessionRunning = false
-    private var selectedSemanticSegmentationMatteTypes = [AVSemanticSegmentationMatte.MatteType]()
     
     // Communicate with the session and other session objects on this queue.
     private let sessionQueue = DispatchQueue(label: "session queue")
@@ -470,7 +566,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
              only try to restart the session in the error handler if you aren't
              trying to resume the session.
              */
-            print("resuming")
             self.captureSession.startRunning()
             self.isSessionRunning = self.captureSession.isRunning
             if !self.captureSession.isRunning {
@@ -483,7 +578,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
                 }
             } else {
             }
-            print("finished resume")
         }
     }
     

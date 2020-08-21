@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -99,7 +99,6 @@
 				7F8B3297C1B2C6CBE2D91379 /* Pods-YellAtPeopleWhoViolateSocialDistancing.debug.xcconfig */,
 				7DA53D1B91F41C2DBADAD1A6 /* Pods-YellAtPeopleWhoViolateSocialDistancing.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -354,6 +353,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T97W5AQ7XC;
 				INFOPLIST_FILE = "$(SRCROOT)/YellAtPeopleWhoViolateSocialDistancing/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -376,6 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T97W5AQ7XC;
 				INFOPLIST_FILE = "$(SRCROOT)/YellAtPeopleWhoViolateSocialDistancing/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
