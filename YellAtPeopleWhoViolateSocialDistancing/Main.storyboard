@@ -45,6 +45,7 @@ Yelling</string>
                                                 <connections>
                                                     <action selector="pressEnableYelling:" destination="BYZ-38-t0r" eventType="touchDown" id="e2G-uf-3Di"/>
                                                     <action selector="releaseEnableYelling:" destination="BYZ-38-t0r" eventType="touchUpInside" id="byQ-uA-bIg"/>
+                                                    <action selector="releaseEnableYellingDrag:" destination="BYZ-38-t0r" eventType="touchDragOutside" id="ft3-Nd-MPr"/>
                                                 </connections>
                                             </button>
                                         </subviews>

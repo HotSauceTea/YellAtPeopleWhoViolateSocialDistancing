@@ -266,9 +266,17 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
     
+    @IBAction func releaseEnableYellingDrag(_ sender: UIButton) {
+        self.yellingEnabled = false
+        self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+    }
+    
     let safeDistance = 6 * 12
     private var distanceString = "Distance: ???"
     private var distance = 99999.0
+    private var lastDistance = 99999.0
+    private var ARconsecutiveNonUpdates = 0
+    private var lastARDistanceUpdateTime = CACurrentMediaTime() + 10
     private var pitch = 0.0 {
         didSet {
             self.updateDistance()
@@ -277,25 +285,31 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     private var ARDistance = 99999.0 {
         didSet {
             self.updateDistance()
+            self.lastARDistanceUpdateTime = CACurrentMediaTime()
+            print("updated ARDistance")
         }
     }
     
     func updateDistance() {
+        print("Last UPdated Time: \(lastARDistanceUpdateTime)")
+        print("Time: \(CACurrentMediaTime())")
         if self.useARDistanceMethod {
             self.distance = self.ARDistance
             //print("updated distance b/c AR")
         } else {
-            self.distance = tan(pitch) * Double(self.dataViewController.getHeight())
+            self.distance = tan(self.pitch) * Double(self.dataViewController.getHeight())
             //print("updated distance b/c trig")
         }
         if self.distance < 0 {
             self.distanceString = "Distance: ???"
-        } else if self.distance > 1200{
+        } else if ((self.distance > 1200) || ((CACurrentMediaTime() - self.lastARDistanceUpdateTime) > 3)) {
             self.distanceString = "Distance: N/A"
+            self.distance = 1300.0
         } else {
             self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
         }
         print(self.distanceString)
+        print(self.distance)
         DispatchQueue.main.async {
             self.distanceDisplay.text = self.distanceString
         }
@@ -339,7 +353,7 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.ARSupported = false
+        //self.ARSupported = false
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -433,7 +447,7 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         }
         print("finished viewdidload")
     }
-        
+    
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         var minDistance = 100000.0
         if self.ARSupported {
