@@ -34,6 +34,7 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
             self.doAdStuff()
         } else {
             DataViewController.adsEnabled = false
+            self.removeAds()
         }
     }
     
@@ -108,9 +109,13 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
     func doAdStuff() {
         self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         addBannerViewToView(self.bannerView)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
+        self.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerView.rootViewController = self
+        self.bannerView.load(GADRequest())
+    }
+    
+    func removeAds() {
+        self.bannerView.removeFromSuperview()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView) {
