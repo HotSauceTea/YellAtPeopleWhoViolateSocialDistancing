@@ -199,32 +199,12 @@ Yelling</string>
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QHR-GI-44T" userLabel="Height Stack View">
-                                        <rect key="frame" x="0.0" y="229.66666666666669" width="321.66666666666669" height="155"/>
+                                        <rect key="frame" x="0.0" y="229.66666666666669" width="321.66666666666669" height="216"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="aPQ-BQ-9qC" userLabel="Height Picker">
-                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="155"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="216"/>
                                             </pickerView>
                                         </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mTF-QF-Q3o" userLabel="AdToggleStackView">
-                                        <rect key="frame" x="0.0" y="384.66666666666669" width="321.66666666666669" height="61"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Ads (If you disable ads, please donate $1 to an anti-coronavirus charity)" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lV0-wk-nHW">
-                                                <rect key="frame" x="0.0" y="0.0" width="261.66666666666669" height="61"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="right" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BB0-Xu-gch">
-                                                <rect key="frame" x="261.66666666666663" y="15" width="62" height="31"/>
-                                                <connections>
-                                                    <action selector="adToggle:" destination="KAu-ET-dkn" eventType="valueChanged" id="psE-BD-QYo"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="lV0-wk-nHW" secondAttribute="trailing" constant="60" id="ajo-qK-VCi"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -241,8 +221,6 @@ Yelling</string>
                     </view>
                     <navigationItem key="navigationItem" id="uoH-dG-ZTm"/>
                     <connections>
-                        <outlet property="adsSwitchButton" destination="BB0-Xu-gch" id="ODw-sr-ZVl"/>
-                        <outlet property="enableAdsLabel" destination="lV0-wk-nHW" id="bTc-vy-0At"/>
                         <outlet property="goBack" destination="DdJ-SH-Iuc" id="Gh2-mO-6U2"/>
                         <outlet property="heightPicker" destination="aPQ-BQ-9qC" id="vqY-Th-L6d"/>
                         <outlet property="heightStackView" destination="QHR-GI-44T" id="rwu-iQ-gcq"/>

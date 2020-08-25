@@ -13,30 +13,16 @@ import Accelerate
 import CoreMotion
 import RealityKit
 import ARKit
-import GoogleMobileAds
 
 class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
-    var pickerData: [String] = []
+    var pickerData: [[String]] = [["Height:"], []]
     static var chosenFeet = "5"
     static var chosenInches = "7"
     static var chosenRow = 67
     static let shoulderBodyProportion = 0.82
     static var useHumanHeight = true
-    let heightLabel = UILabel()
-    var bannerView: GADBannerView!
-    static var adsEnabled = true
-    
-    @IBOutlet var adsSwitchButton: UISwitch!
-    @IBAction func adToggle(_ sender: Any) {
-        if (sender as AnyObject).isOn {
-            DataViewController.adsEnabled = true
-            self.doAdStuff()
-        } else {
-            DataViewController.adsEnabled = false
-            self.removeAds()
-        }
-    }
+
     
     @IBOutlet weak var segmentedControlButton: UISegmentedControl!
     
@@ -57,7 +43,7 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var goBack: UIButton!
 
     @IBOutlet weak var sayThisTextField: UITextField!
-    static var sayThisText = "social distancing is for your safety. I haven't showered in weeks."
+    static var sayThisText = "Social distancing is for your safety. I haven't showered in weeks."
     
 
     @IBAction func goBack(_ sender: UIButton) {
@@ -74,14 +60,9 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         return true
     }
     
-    @IBOutlet var enableAdsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        adsSwitchButton.isOn = DataViewController.adsEnabled
-        /*
-        adsSwitchButton.setContentHuggingPriority(UILayoutPriority.defaultLow, for:.horizontal)
-        enableAdsLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for:.horizontal)
-        */
+
         self.heightPicker.delegate = self
         self.heightPicker.dataSource = self
         self.sayThisTextField.delegate = self
@@ -89,7 +70,7 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         //pickerData = [["0", "1", "2", "3", "4", "5", "6", "7"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]]
         for feet in 0...7 {
             for inches in 0...11 {
-                pickerData.append("\(feet)'\(inches)\"")
+                pickerData[1].append("\(feet)'\(inches)\"")
             }
         }
         if DataViewController.useHumanHeight {
@@ -98,66 +79,35 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
             segmentedControlButton.selectedSegmentIndex = 1
         }
         self.heightPicker.selectRow(DataViewController.chosenRow, inComponent: 0, animated: false)
-        self.heightLabel.text = "Height:"
-        
-        self.heightPicker.setPickerLabels(labels: [0: self.heightLabel], containedView: heightStackView)
-        if DataViewController.adsEnabled {
-            self.doAdStuff()
-        }
+    
     }
     
-    func doAdStuff() {
-        self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        addBannerViewToView(self.bannerView)
-        self.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        self.bannerView.rootViewController = self
-        self.bannerView.load(GADRequest())
-    }
-    
-    func removeAds() {
-        self.bannerView.removeFromSuperview()
-    }
-    
-    func addBannerViewToView(_ bannerView: GADBannerView) {
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bannerView)
-        view.addConstraints(
-            [NSLayoutConstraint(item: bannerView,
-                          attribute: .bottom,
-                          relatedBy: .equal,
-                          toItem: bottomLayoutGuide,
-                          attribute: .top,
-                          multiplier: 1,
-                          constant: 0),
-            NSLayoutConstraint(item: bannerView,
-                          attribute: .centerX,
-                          relatedBy: .equal,
-                          toItem: view,
-                          attribute: .centerX,
-                          multiplier: 1,
-                          constant: 0)
-        ])
-   }
-    
+
     // Number of columns of data
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return 2
     }
     
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        if (component == 0) {
+            return 1
+        } else {
+            return pickerData[1].count
+        }
     }
     
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        print(component)
+        print(row)
+        return pickerData[component][row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         DataViewController.chosenRow = row
         print("New DataViewController.chosenRow: \(DataViewController.chosenRow)")
-        let val = pickerData[row]
+        let val = pickerData[component][row]
         print("row:\(row) val:\(val)")
         let valArr = val.components(separatedBy: "'")
         DataViewController.chosenFeet = valArr[0]
@@ -181,32 +131,6 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         return height
     }
 
-}
-
-extension UIPickerView {
-   
-    func setPickerLabels(labels: [Int:UILabel], containedView: UIView) { // [component number:label]
-        
-        let fontSize:CGFloat = 20
-        let labelWidth:CGFloat = containedView.bounds.width / CGFloat(self.numberOfComponents)
-        let x:CGFloat = self.frame.origin.x
-        let y:CGFloat = (self.frame.size.height / 2) - (fontSize / 2)
-        
-        for i in 0...self.numberOfComponents {
-            if let label = labels[i] {
-                if self.subviews.contains(label) {
-                    label.removeFromSuperview()
-                }
-                
-                label.frame = CGRect(x: x + labelWidth * CGFloat(i), y: y + fontSize * 1.5, width: labelWidth, height: fontSize)
-                label.font = UIFont.boldSystemFont(ofSize: fontSize)
-                label.backgroundColor = .clear
-                label.textAlignment = NSTextAlignment.left
-                
-                self.addSubview(label)
-            }
-        }
-    }
 }
 
 class CameraViewController: UIViewController, ARSessionDelegate {
