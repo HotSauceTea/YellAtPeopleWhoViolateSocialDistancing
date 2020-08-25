@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -89,10 +89,10 @@
 		64A69818CEA1179D976A41715AFB28ED /* FBLPromise+All.m in Sources */ = {isa = PBXBuildFile; fileRef = 1189F388AEDC1FB67F52B30A14CCA869 /* FBLPromise+All.m */; };
 		6861757F0BD65936221372772907AB56 /* FBLPromise+Then.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 1D380DAA1BECA5496DA29F1965A2406C /* FBLPromise+Then.h */; };
 		6867F967DE682E4A3C12ED652040A382 /* GULSceneDelegateSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1515CBF945DC71BC17BE7579DDA675B3 /* GULSceneDelegateSwizzler.m */; };
+		6BB9FE3070DC42D2078AADC807400E0C /* Pods-YellAtPeopleWhoViolateSocialDistancing-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E4CD8E022138D694FB3C1C7412395050 /* Pods-YellAtPeopleWhoViolateSocialDistancing-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E120F1908190BBBEBA42ECBBD1552D6 /* GULNetworkURLSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E28D499F37105C9EBD78528CA62D5D02 /* GULNetworkURLSession.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6E230FF1A712EF066E0CAEA913533D93 /* GULNetworkURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DD9BE0A3C4B9F7C558E8A359083F2BD4 /* GULNetworkURLSession.m */; };
 		6EED73603647EB745D85C5B96ECB549A /* pb_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB47BD90138288560ADF14BC7A992C /* pb_common.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc -fno-objc-arc"; }; };
-		7266D2A37B743682CC8394A2A3CCE29F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F4340DA10D8145A41A53BECD1F4B85 /* Foundation.framework */; };
 		77DB6CADE39500C283C1E9802A6D27C9 /* FBLPromiseError.m in Sources */ = {isa = PBXBuildFile; fileRef = 546DA4744954AC98A7D9727BF50FD473 /* FBLPromiseError.m */; };
 		7A4E038BEF44B72A0BC47699DA0A7B81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F4340DA10D8145A41A53BECD1F4B85 /* Foundation.framework */; };
 		7ADEEEA9A42C8E3A3032C1F540FD7E89 /* FBLPromise+Wrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 405EBC18F7A280E80242D5315D1EB693 /* FBLPromise+Wrap.m */; };
@@ -114,18 +114,17 @@
 		9F62E44765117A416D00DA81E99E7695 /* GULLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D261B9CFD88B64CFFEE9BB14D6761253 /* GULLogger.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A38BE6043120EB823B4B41946281996B /* GULReachabilityChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DE977A6212ACF5957F7ED4DB8F1879F /* GULReachabilityChecker.m */; };
 		A3B4C4CAB5818105752FA29C29A0F330 /* FBLPromiseError.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = C04E8F28C8781A05FD59B468A29F108F /* FBLPromiseError.h */; };
-		A4734551B8273688FC2D60DAAC01B667 /* Pods-YellWhenNotSocialDistancing-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FD60B712F8F9BCCDFD7569730BAB18 /* Pods-YellWhenNotSocialDistancing-dummy.m */; };
 		A736831E5A8C6220E16517D612CF7CEF /* FBLPromise+Any.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = E0C67FBA2012E699EC71749BD3A81891 /* FBLPromise+Any.h */; };
 		B12F306CD112D6544B9D021BFBF09715 /* GULAppDelegateSwizzler.h in Headers */ = {isa = PBXBuildFile; fileRef = 00727DE0E04B39393F627548D8E93E97 /* GULAppDelegateSwizzler.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B50A8BF5B646CD4CE4A6B1FDCCB7A10B /* FBLPromise+Delay.h in Headers */ = {isa = PBXBuildFile; fileRef = D6E21705034DD76CB257426DA46B44AC /* FBLPromise+Delay.h */; };
 		B55C08FA3EDB02296A5154CD8C503D39 /* FBLPromise+Any.h in Headers */ = {isa = PBXBuildFile; fileRef = E0C67FBA2012E699EC71749BD3A81891 /* FBLPromise+Any.h */; };
 		B7C48B8A4CAA8B9E537C0AB046975E3E /* pb_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = F845C9C92764C832A5614E508DFA6BB3 /* pb_encode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc"; }; };
-		B8E3929F2F02EFF402EF93A555743E54 /* Pods-YellWhenNotSocialDistancing-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 81A0436CF8A6A33FBCBB797CF057F12A /* Pods-YellWhenNotSocialDistancing-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B95ADB51B6C385564A3A8DB19A61E509 /* FBLPromise+Do.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BA3E23AD0F2F551BE77CD3BEE381BD5 /* FBLPromise+Do.h */; };
 		BC7E90B2CB82586DB30F7B07A97A9030 /* FBLPromise+Retry.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 8FBB75F6FB29D1AEA35AC250EFA98CA1 /* FBLPromise+Retry.h */; };
 		BD73381AF47F1CD4FDA94791F96D118C /* GULNetworkMessageCode.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE64683770FE69B446BEE81DC96E378 /* GULNetworkMessageCode.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BDF87D206920EC1B682E9C7743C53C54 /* FBLPromise+Await.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EA1189AE195148BF8DB36338AE0D32 /* FBLPromise+Await.m */; };
 		BEF9C1FE4B018958A12775D86947C2EA /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E31363D7AA34FDDF1F9DE489D18F5B6D /* FBLPromises.framework */; };
+		BF88946F4107A21BF66F7232583433F8 /* Pods-YellAtPeopleWhoViolateSocialDistancing-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0881983CACB2A0EBB75CA39C5CFD6187 /* Pods-YellAtPeopleWhoViolateSocialDistancing-dummy.m */; };
 		C2326ECB03F240D40902DC93451655FA /* FBLPromise+Wrap.h in Headers */ = {isa = PBXBuildFile; fileRef = A63E9793494465AD36C6D883672F171F /* FBLPromise+Wrap.h */; };
 		C4938FE6AB7BAD49432487630DA27885 /* GULSceneDelegateSwizzler.h in Headers */ = {isa = PBXBuildFile; fileRef = 778C43E5E61456D107D7F74F5AFA2440 /* GULSceneDelegateSwizzler.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C57DF0A5D3A4EE3C239B0C5B2C81F747 /* FBLPromises.h in Headers */ = {isa = PBXBuildFile; fileRef = CFF81389D2C7EB87C680EEF623BAB1C1 /* FBLPromises.h */; };
@@ -144,6 +143,7 @@
 		E39DC0E063706D05E4A7AC96E0A0B036 /* GULNetworkLoggerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 175AB0A1F9B7070F8B97D16506F400A0 /* GULNetworkLoggerProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E4B0A251A96FFC7EFCA12C72ABE92C5B /* pb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6F551526E768C70075FF1C8C994F38 /* pb.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E754F90DC3EEF675EAAB8FC002998153 /* pb_decode.h in Headers */ = {isa = PBXBuildFile; fileRef = E559067F8337CA23A0F1B583FDA5DBC9 /* pb_decode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE9749DF936EE4718AA5ED2BBF90D00E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F4340DA10D8145A41A53BECD1F4B85 /* Foundation.framework */; };
 		EF419E31EC679BD626B89D90605FBC1F /* GULAppEnvironmentUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 7088A3FDCF30F285880534FC4BD431EA /* GULAppEnvironmentUtil.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F16C80C10805D32DF3F3DDA01D95A0D1 /* FBLPromise+Async.h in Headers */ = {isa = PBXBuildFile; fileRef = A598D3FD1D3F1612A57097AC19D60DB7 /* FBLPromise+Async.h */; };
 		F27A8835C56D1F2FB423CF956A798234 /* FBLPromise+Recover.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 8340A2948CD8F30C71CAE175C72C9A3F /* FBLPromise+Recover.h */; };
@@ -158,12 +158,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3701E7400EE44C4B0CDFC576B5DBDFCD /* PBXContainerItemProxy */ = {
+		148846791A54A1FE2859682ABFD588B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2BBF7206D7FAC92C82A042A99C4A98F8;
-			remoteInfo = PromisesObjC;
+			remoteGlobalIDString = B53D977A951AFC38B21751B706C1DF83;
+			remoteInfo = GoogleAppMeasurement;
+		};
+		2A4732FE0EC7B981EEB92A7940513720 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2B5E7DCCBBFB32341D857D01211A1A3;
+			remoteInfo = nanopb;
 		};
 		4870387674177323A819CA2112487CB5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -172,28 +179,14 @@
 			remoteGlobalIDString = B53D977A951AFC38B21751B706C1DF83;
 			remoteInfo = GoogleAppMeasurement;
 		};
-		934064983E2584855528503ECCD06EF6 /* PBXContainerItemProxy */ = {
+		A6E5683A473C9430708A7C0C4B0EF15D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D7F5D5DD528D21A72DC87ADA5B12E2D;
-			remoteInfo = GoogleUtilities;
+			remoteGlobalIDString = 2BBF7206D7FAC92C82A042A99C4A98F8;
+			remoteInfo = PromisesObjC;
 		};
 		B0528F05A81DDF4B452C6ED005CD7491 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2B5E7DCCBBFB32341D857D01211A1A3;
-			remoteInfo = nanopb;
-		};
-		BAF6F3B830BD21F2C7E14FEF85060720 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B53D977A951AFC38B21751B706C1DF83;
-			remoteInfo = GoogleAppMeasurement;
-		};
-		DEC14C143008A1D87AE96914443A042D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -207,19 +200,26 @@
 			remoteGlobalIDString = 2BBF7206D7FAC92C82A042A99C4A98F8;
 			remoteInfo = PromisesObjC;
 		};
-		FE57F1529C99517A4B02599F8B96812B /* PBXContainerItemProxy */ = {
+		ED894AB0F3904564A48C24175BBFCDFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FEA3B3A570634836C0457F3D7CEF1699;
+			remoteInfo = "Google-Mobile-Ads-SDK";
+		};
+		F71BFDA1A388A1223CC6FC8FD0A23790 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8D7F5D5DD528D21A72DC87ADA5B12E2D;
 			remoteInfo = GoogleUtilities;
 		};
-		FF09DA6AFD50A8897883B03DC18CD1A1 /* PBXContainerItemProxy */ = {
+		FE57F1529C99517A4B02599F8B96812B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FEA3B3A570634836C0457F3D7CEF1699;
-			remoteInfo = "Google-Mobile-Ads-SDK";
+			remoteGlobalIDString = 8D7F5D5DD528D21A72DC87ADA5B12E2D;
+			remoteInfo = GoogleUtilities;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -271,13 +271,14 @@
 		00727DE0E04B39393F627548D8E93E97 /* GULAppDelegateSwizzler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULAppDelegateSwizzler.h; path = GoogleUtilities/AppDelegateSwizzler/Private/GULAppDelegateSwizzler.h; sourceTree = "<group>"; };
 		068A41428A7EC211D0B398DE2ED7A2B0 /* FBLPromise+Async.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Async.m"; path = "Sources/FBLPromises/FBLPromise+Async.m"; sourceTree = "<group>"; };
 		06FC5C9CF96D60C50FCD47D339C91951 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = nanopb.framework; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		07EB34DD0DB414E1D1BBD8CA8F801696 /* Pods-YellWhenNotSocialDistancing-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-YellWhenNotSocialDistancing-frameworks.sh"; sourceTree = "<group>"; };
+		0881983CACB2A0EBB75CA39C5CFD6187 /* Pods-YellAtPeopleWhoViolateSocialDistancing-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-YellAtPeopleWhoViolateSocialDistancing-dummy.m"; sourceTree = "<group>"; };
 		08D11EB0BE52754E2BED5DDBF7F149A2 /* FBLPromisePrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBLPromisePrivate.h; path = Sources/FBLPromises/include/FBLPromisePrivate.h; sourceTree = "<group>"; };
 		0B5270596912FA021E8AE542F26BDEBD /* FBLPromise+Await.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Await.h"; path = "Sources/FBLPromises/include/FBLPromise+Await.h"; sourceTree = "<group>"; };
 		0BA3E23AD0F2F551BE77CD3BEE381BD5 /* FBLPromise+Do.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Do.h"; path = "Sources/FBLPromises/include/FBLPromise+Do.h"; sourceTree = "<group>"; };
 		0BDB47BD90138288560ADF14BC7A992C /* pb_common.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_common.c; sourceTree = "<group>"; };
 		10D25513EA71EFB73027103E12C56133 /* GULKeychainStorage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULKeychainStorage.m; path = GoogleUtilities/Environment/SecureStorage/GULKeychainStorage.m; sourceTree = "<group>"; };
 		1189F388AEDC1FB67F52B30A14CCA869 /* FBLPromise+All.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+All.m"; path = "Sources/FBLPromises/FBLPromise+All.m"; sourceTree = "<group>"; };
+		143A8B6C2089740C3999AFAEC8EB7DB5 /* Pods-YellAtPeopleWhoViolateSocialDistancing-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YellAtPeopleWhoViolateSocialDistancing-acknowledgements.plist"; sourceTree = "<group>"; };
 		145E38D93B08596F0BFA2530720CFA69 /* PromisesObjC-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PromisesObjC-Info.plist"; sourceTree = "<group>"; };
 		14EA1189AE195148BF8DB36338AE0D32 /* FBLPromise+Await.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Await.m"; path = "Sources/FBLPromises/FBLPromise+Await.m"; sourceTree = "<group>"; };
 		1515CBF945DC71BC17BE7579DDA675B3 /* GULSceneDelegateSwizzler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULSceneDelegateSwizzler.m; path = GoogleUtilities/SceneDelegateSwizzler/GULSceneDelegateSwizzler.m; sourceTree = "<group>"; };
@@ -291,6 +292,7 @@
 		1D380DAA1BECA5496DA29F1965A2406C /* FBLPromise+Then.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Then.h"; path = "Sources/FBLPromises/include/FBLPromise+Then.h"; sourceTree = "<group>"; };
 		1E0AF8DB462118CBB3A08EDCE1940DE7 /* FBLPromise+Race.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Race.m"; path = "Sources/FBLPromises/FBLPromise+Race.m"; sourceTree = "<group>"; };
 		1EB43731C1576B7F14A1629A1E62B057 /* GULSecureCoding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULSecureCoding.h; path = GoogleUtilities/Environment/Private/GULSecureCoding.h; sourceTree = "<group>"; };
+		206A5D835C51BD3696B3CD691B877AF4 /* Pods-YellAtPeopleWhoViolateSocialDistancing-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-YellAtPeopleWhoViolateSocialDistancing-frameworks.sh"; sourceTree = "<group>"; };
 		229D5F81E868198ECE013261C62C6D22 /* GULReachabilityChecker+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GULReachabilityChecker+Internal.h"; path = "GoogleUtilities/Reachability/GULReachabilityChecker+Internal.h"; sourceTree = "<group>"; };
 		22C7075D32B01D12CCA16A0FAD75E19A /* nanopb-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "nanopb-Info.plist"; sourceTree = "<group>"; };
 		234887056491CFD9CC89D063D93FD598 /* FBLPromise+Reduce.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Reduce.h"; path = "Sources/FBLPromises/include/FBLPromise+Reduce.h"; sourceTree = "<group>"; };
@@ -305,13 +307,9 @@
 		3062398C10644B50960807B5591722D0 /* pb_common.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_common.h; sourceTree = "<group>"; };
 		311F56691DED81F0B5DB83CAE66BC752 /* FBLPromise+Catch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Catch.m"; path = "Sources/FBLPromises/FBLPromise+Catch.m"; sourceTree = "<group>"; };
 		324E26DBCEC00EB472120A776DDB5B30 /* GULReachabilityChecker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULReachabilityChecker.h; path = GoogleUtilities/Reachability/Private/GULReachabilityChecker.h; sourceTree = "<group>"; };
-		32FD60B712F8F9BCCDFD7569730BAB18 /* Pods-YellWhenNotSocialDistancing-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-YellWhenNotSocialDistancing-dummy.m"; sourceTree = "<group>"; };
 		3347A1AB6546F0A3977529B8F199DC41 /* FBLPromises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FBLPromises.framework; path = PromisesObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		351A2796C135F92A9DC22FB6EF57D55B /* PromisesObjC-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PromisesObjC-dummy.m"; sourceTree = "<group>"; };
-		3530995984FAA8796A58E059BA082216 /* Pods-YellWhenNotSocialDistancing.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-YellWhenNotSocialDistancing.modulemap"; sourceTree = "<group>"; };
 		373B3F6B0F0A7126D3C8A19ED3C35E0F /* GULSwizzler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULSwizzler.m; path = GoogleUtilities/MethodSwizzler/GULSwizzler.m; sourceTree = "<group>"; };
-		3911B8779B7B34A5A07114936F841781 /* Pods-YellWhenNotSocialDistancing-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-YellWhenNotSocialDistancing-acknowledgements.markdown"; sourceTree = "<group>"; };
-		39EEEA470AE9CF9109468449E4344EB9 /* Pods-YellWhenNotSocialDistancing-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YellWhenNotSocialDistancing-acknowledgements.plist"; sourceTree = "<group>"; };
 		3A483D0888276B677EB779F6142F61AA /* PromisesObjC-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PromisesObjC-umbrella.h"; sourceTree = "<group>"; };
 		3ADDAAA5A4AEC16E0F3E9D9765A7AF32 /* FBLPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBLPromise.m; path = Sources/FBLPromises/FBLPromise.m; sourceTree = "<group>"; };
 		3ED5FDD28D0EE507831295349D318F68 /* FBLPromise+Retry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Retry.m"; path = "Sources/FBLPromises/FBLPromise+Retry.m"; sourceTree = "<group>"; };
@@ -340,30 +338,29 @@
 		7C48F2FC18890FA5B784A0622E9D88B9 /* FBLPromise+Timeout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Timeout.h"; path = "Sources/FBLPromises/include/FBLPromise+Timeout.h"; sourceTree = "<group>"; };
 		7ECE0A22983C1E0F6D5B945D27D115CF /* nanopb-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "nanopb-prefix.pch"; sourceTree = "<group>"; };
 		7ED8E2E9E5CD6015C7A8B555088923A7 /* GULNetworkConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULNetworkConstants.m; path = GoogleUtilities/Network/GULNetworkConstants.m; sourceTree = "<group>"; };
-		81A0436CF8A6A33FBCBB797CF057F12A /* Pods-YellWhenNotSocialDistancing-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-YellWhenNotSocialDistancing-umbrella.h"; sourceTree = "<group>"; };
 		8340A2948CD8F30C71CAE175C72C9A3F /* FBLPromise+Recover.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Recover.h"; path = "Sources/FBLPromises/include/FBLPromise+Recover.h"; sourceTree = "<group>"; };
 		8473B245EA8755B2E7A96302ADD95AB0 /* PromisesObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PromisesObjC.release.xcconfig; sourceTree = "<group>"; };
-		8591D056E473278FD5689AC0ABCB485D /* Pods-YellWhenNotSocialDistancing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YellWhenNotSocialDistancing.debug.xcconfig"; sourceTree = "<group>"; };
 		869E8D5A45C4037B58B6BC2F50809978 /* GULLoggerCodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULLoggerCodes.h; path = GoogleUtilities/Common/GULLoggerCodes.h; sourceTree = "<group>"; };
 		86CDC4EC437B66D19F0660590EEC1BB2 /* FBLPromise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBLPromise.h; path = Sources/FBLPromises/include/FBLPromise.h; sourceTree = "<group>"; };
 		8CF74D44703B1EA36300C3B68C5F9E87 /* GULAppDelegateSwizzler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULAppDelegateSwizzler.m; path = GoogleUtilities/AppDelegateSwizzler/GULAppDelegateSwizzler.m; sourceTree = "<group>"; };
 		8FBB75F6FB29D1AEA35AC250EFA98CA1 /* FBLPromise+Retry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Retry.h"; path = "Sources/FBLPromises/include/FBLPromise+Retry.h"; sourceTree = "<group>"; };
-		916B48F92C3A72AAB107218879A0C902 /* Pods-YellWhenNotSocialDistancing-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YellWhenNotSocialDistancing-Info.plist"; sourceTree = "<group>"; };
 		98C1506235FFC2A8497E9F123026389F /* GULNetwork.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULNetwork.m; path = GoogleUtilities/Network/GULNetwork.m; sourceTree = "<group>"; };
 		99FFD08853A31E9AD77BD6117CE89BBB /* FBLPromise+Recover.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Recover.m"; path = "Sources/FBLPromises/FBLPromise+Recover.m"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A17B77A107D4F80C434A1A746C4C7C6F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		A2225AED3CCA10413B4F035FA90A6E64 /* FBLPromise+Timeout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Timeout.m"; path = "Sources/FBLPromises/FBLPromise+Timeout.m"; sourceTree = "<group>"; };
-		A2A819651D2B0B8838A3A32717D98081 /* Pods-YellWhenNotSocialDistancing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YellWhenNotSocialDistancing.release.xcconfig"; sourceTree = "<group>"; };
 		A350C17371563F10002D6C623012C9ED /* GULMutableDictionary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULMutableDictionary.h; path = GoogleUtilities/Network/Private/GULMutableDictionary.h; sourceTree = "<group>"; };
 		A598D3FD1D3F1612A57097AC19D60DB7 /* FBLPromise+Async.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Async.h"; path = "Sources/FBLPromises/include/FBLPromise+Async.h"; sourceTree = "<group>"; };
 		A63E9793494465AD36C6D883672F171F /* FBLPromise+Wrap.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Wrap.h"; path = "Sources/FBLPromises/include/FBLPromise+Wrap.h"; sourceTree = "<group>"; };
+		A6594CF4D4466D5A0527CA40DE8E8E3D /* Pods-YellAtPeopleWhoViolateSocialDistancing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YellAtPeopleWhoViolateSocialDistancing.release.xcconfig"; sourceTree = "<group>"; };
 		A6721698243E540D7A6EE0886650391C /* GoogleUtilities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleUtilities.debug.xcconfig; sourceTree = "<group>"; };
 		A8205A0512BD2B1E9D917782542F64A0 /* GULApplication.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULApplication.h; path = GoogleUtilities/AppDelegateSwizzler/Private/GULApplication.h; sourceTree = "<group>"; };
 		AAE64683770FE69B446BEE81DC96E378 /* GULNetworkMessageCode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULNetworkMessageCode.h; path = GoogleUtilities/Network/Private/GULNetworkMessageCode.h; sourceTree = "<group>"; };
+		AD79E3DB01CDE903667AFE79C94ABB78 /* Pods_YellAtPeopleWhoViolateSocialDistancing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_YellAtPeopleWhoViolateSocialDistancing.framework; path = "Pods-YellAtPeopleWhoViolateSocialDistancing.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2AA35679BDDE984F0E8B1DAF571B8B0 /* FBLPromise+Catch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Catch.h"; path = "Sources/FBLPromises/include/FBLPromise+Catch.h"; sourceTree = "<group>"; };
 		B3396AD3C6E6C9377DF7F38A7CEE33C1 /* GULMutableDictionary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULMutableDictionary.m; path = GoogleUtilities/Network/GULMutableDictionary.m; sourceTree = "<group>"; };
 		B37FCC3FCC9D8A1BB6CEFCC5530938B5 /* FBLPromise+Testing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Testing.m"; path = "Sources/FBLPromises/FBLPromise+Testing.m"; sourceTree = "<group>"; };
+		B39933202F07755FD79E7C70F8D512D5 /* Pods-YellAtPeopleWhoViolateSocialDistancing-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-YellAtPeopleWhoViolateSocialDistancing-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B43874C6CBB50E7134FBEC24BABFE14F /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GoogleUtilities.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B567320DAF5C31C9D623FCBBE94DD535 /* GoogleUtilities-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleUtilities-dummy.m"; sourceTree = "<group>"; };
 		B6247770742D0A7B21D23C6ED97FED6A /* GULOriginalIMPConvenienceMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULOriginalIMPConvenienceMacros.h; path = GoogleUtilities/MethodSwizzler/Private/GULOriginalIMPConvenienceMacros.h; sourceTree = "<group>"; };
@@ -372,6 +369,7 @@
 		BB4B24A44B100A2CE8ED9481C5D7337E /* GoogleUtilities.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GoogleUtilities.modulemap; sourceTree = "<group>"; };
 		BCCDBDE6FDF9EDC7E11CF7AD7CC9A3E3 /* GULNetworkConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULNetworkConstants.h; path = GoogleUtilities/Network/Private/GULNetworkConstants.h; sourceTree = "<group>"; };
 		BEF266DF944B9DDF766C4C0F368FDE15 /* GoogleUtilities-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleUtilities-umbrella.h"; sourceTree = "<group>"; };
+		C0388F88C01C60C6E4C025C348437A08 /* Pods-YellAtPeopleWhoViolateSocialDistancing.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-YellAtPeopleWhoViolateSocialDistancing.modulemap"; sourceTree = "<group>"; };
 		C04E8F28C8781A05FD59B468A29F108F /* FBLPromiseError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBLPromiseError.h; path = Sources/FBLPromises/include/FBLPromiseError.h; sourceTree = "<group>"; };
 		CAC7DCE70CBFC4D1EF5E92892346B90F /* GULNSData+zlib.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "GULNSData+zlib.m"; path = "GoogleUtilities/NSData+zlib/GULNSData+zlib.m"; sourceTree = "<group>"; };
 		CFF81389D2C7EB87C680EEF623BAB1C1 /* FBLPromises.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBLPromises.h; path = Sources/FBLPromises/include/FBLPromises.h; sourceTree = "<group>"; };
@@ -388,17 +386,19 @@
 		E0C67FBA2012E699EC71749BD3A81891 /* FBLPromise+Any.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Any.h"; path = "Sources/FBLPromises/include/FBLPromise+Any.h"; sourceTree = "<group>"; };
 		E28D499F37105C9EBD78528CA62D5D02 /* GULNetworkURLSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULNetworkURLSession.h; path = GoogleUtilities/Network/Private/GULNetworkURLSession.h; sourceTree = "<group>"; };
 		E31363D7AA34FDDF1F9DE489D18F5B6D /* FBLPromises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBLPromises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4CD8E022138D694FB3C1C7412395050 /* Pods-YellAtPeopleWhoViolateSocialDistancing-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-YellAtPeopleWhoViolateSocialDistancing-umbrella.h"; sourceTree = "<group>"; };
 		E559067F8337CA23A0F1B583FDA5DBC9 /* pb_decode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_decode.h; sourceTree = "<group>"; };
 		E7D15B29A0D4A91C76C0CB414B76EAFC /* nanopb-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "nanopb-dummy.m"; sourceTree = "<group>"; };
 		E8302F524C3F4FFEC5EC3A3F2CCCDB72 /* GULAppEnvironmentUtil.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GULAppEnvironmentUtil.m; path = GoogleUtilities/Environment/third_party/GULAppEnvironmentUtil.m; sourceTree = "<group>"; };
 		EA231B9FFC227C9400EB0161EA96552F /* GULKeychainUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULKeychainUtils.h; path = GoogleUtilities/Environment/Private/GULKeychainUtils.h; sourceTree = "<group>"; };
 		EAE1E9E56487AF795AB3400F294EA848 /* FBLPromise+Delay.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Delay.m"; path = "Sources/FBLPromises/FBLPromise+Delay.m"; sourceTree = "<group>"; };
+		EEA00DF781125BD97FC32ED0F0BC41E8 /* Pods-YellAtPeopleWhoViolateSocialDistancing-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YellAtPeopleWhoViolateSocialDistancing-Info.plist"; sourceTree = "<group>"; };
 		EFD9E05D3310B9688F4C20BC9E151AE7 /* FBLPromise+Race.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Race.h"; path = "Sources/FBLPromises/include/FBLPromise+Race.h"; sourceTree = "<group>"; };
+		F07922E7004DE74CE81C559308B8696B /* Pods-YellAtPeopleWhoViolateSocialDistancing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YellAtPeopleWhoViolateSocialDistancing.debug.xcconfig"; sourceTree = "<group>"; };
 		F11C4DB51812CF68E601CB20051B3E91 /* GULKeychainStorage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULKeychainStorage.h; path = GoogleUtilities/Environment/Private/GULKeychainStorage.h; sourceTree = "<group>"; };
 		F335316CC6421D9A5974D0B026B4886C /* FBLPromise+Reduce.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "FBLPromise+Reduce.m"; path = "Sources/FBLPromises/FBLPromise+Reduce.m"; sourceTree = "<group>"; };
 		F3E452FEB4F65511969F65E39489FF15 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		F845C9C92764C832A5614E508DFA6BB3 /* pb_encode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_encode.c; sourceTree = "<group>"; };
-		FE94B7A34DD96484208D6B42032F7CE5 /* Pods_YellWhenNotSocialDistancing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_YellWhenNotSocialDistancing.framework; path = "Pods-YellWhenNotSocialDistancing.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF0673B13146215E9318E92579292383 /* GoogleAppMeasurement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleAppMeasurement.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -419,6 +419,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C541C17A809274E5E81DC9F421E7F477 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE9749DF936EE4718AA5ED2BBF90D00E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5835E4949287FD1365115521B8C991C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,14 +435,6 @@
 				7A4E038BEF44B72A0BC47699DA0A7B81 /* Foundation.framework in Frameworks */,
 				1722041731CE1B4746CC2F5E1D53D9E4 /* Security.framework in Frameworks */,
 				36C9DC542ED0141BC60D591049819510 /* SystemConfiguration.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E25B8D026CAED0907B10FD137B804C46 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7266D2A37B743682CC8394A2A3CCE29F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +561,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7A14F2DDD76339499D3C07F439952F30 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FF4BF3D06A60D5CA06FED33FCA852D1D /* Pods-YellAtPeopleWhoViolateSocialDistancing */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		8593F139548BC045F0E24746371B2DAE /* NSData+zlib */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,17 +609,6 @@
 			children = (
 			);
 			name = encode;
-			sourceTree = "<group>";
-		};
-		AA26E4E75E4A14ACD52DEE10C8F594D5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3347A1AB6546F0A3977529B8F199DC41 /* FBLPromises.framework */,
-				B43874C6CBB50E7134FBEC24BABFE14F /* GoogleUtilities.framework */,
-				06FC5C9CF96D60C50FCD47D339C91951 /* nanopb.framework */,
-				FE94B7A34DD96484208D6B42032F7CE5 /* Pods_YellWhenNotSocialDistancing.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		AC1C6404BE52CBDA5BED2D87546C74C2 /* Support Files */ = {
@@ -737,9 +734,20 @@
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				795120B0126AC0EB81CEA83C8DFA3B30 /* Frameworks */,
 				00E7081DC0AE83C3ECD5729E2817E639 /* Pods */,
-				AA26E4E75E4A14ACD52DEE10C8F594D5 /* Products */,
-				DE1AA412A0A594E645C09A0E5F3002C0 /* Targets Support Files */,
+				D6A5F13FAEBD6CD4499ABB5E4F1CA9B2 /* Products */,
+				7A14F2DDD76339499D3C07F439952F30 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		D6A5F13FAEBD6CD4499ABB5E4F1CA9B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3347A1AB6546F0A3977529B8F199DC41 /* FBLPromises.framework */,
+				B43874C6CBB50E7134FBEC24BABFE14F /* GoogleUtilities.framework */,
+				06FC5C9CF96D60C50FCD47D339C91951 /* nanopb.framework */,
+				AD79E3DB01CDE903667AFE79C94ABB78 /* Pods_YellAtPeopleWhoViolateSocialDistancing.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		DA3EC5477A0B31C1CB4F5F6558908F02 /* Reachability */ = {
@@ -751,31 +759,6 @@
 				605EA86F0ECCEFC7F26AE6FD6A15E0FA /* GULReachabilityMessageCode.h */,
 			);
 			name = Reachability;
-			sourceTree = "<group>";
-		};
-		DE1AA412A0A594E645C09A0E5F3002C0 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				ED4C975823D745B479F46397033392AC /* Pods-YellWhenNotSocialDistancing */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		ED4C975823D745B479F46397033392AC /* Pods-YellWhenNotSocialDistancing */ = {
-			isa = PBXGroup;
-			children = (
-				3530995984FAA8796A58E059BA082216 /* Pods-YellWhenNotSocialDistancing.modulemap */,
-				3911B8779B7B34A5A07114936F841781 /* Pods-YellWhenNotSocialDistancing-acknowledgements.markdown */,
-				39EEEA470AE9CF9109468449E4344EB9 /* Pods-YellWhenNotSocialDistancing-acknowledgements.plist */,
-				32FD60B712F8F9BCCDFD7569730BAB18 /* Pods-YellWhenNotSocialDistancing-dummy.m */,
-				07EB34DD0DB414E1D1BBD8CA8F801696 /* Pods-YellWhenNotSocialDistancing-frameworks.sh */,
-				916B48F92C3A72AAB107218879A0C902 /* Pods-YellWhenNotSocialDistancing-Info.plist */,
-				81A0436CF8A6A33FBCBB797CF057F12A /* Pods-YellWhenNotSocialDistancing-umbrella.h */,
-				8591D056E473278FD5689AC0ABCB485D /* Pods-YellWhenNotSocialDistancing.debug.xcconfig */,
-				A2A819651D2B0B8838A3A32717D98081 /* Pods-YellWhenNotSocialDistancing.release.xcconfig */,
-			);
-			name = "Pods-YellWhenNotSocialDistancing";
-			path = "Target Support Files/Pods-YellWhenNotSocialDistancing";
 			sourceTree = "<group>";
 		};
 		F96A98A56EFA675719654FCA956FB90B /* nanopb */ = {
@@ -806,6 +789,23 @@
 			path = "../Target Support Files/GoogleAppMeasurement";
 			sourceTree = "<group>";
 		};
+		FF4BF3D06A60D5CA06FED33FCA852D1D /* Pods-YellAtPeopleWhoViolateSocialDistancing */ = {
+			isa = PBXGroup;
+			children = (
+				C0388F88C01C60C6E4C025C348437A08 /* Pods-YellAtPeopleWhoViolateSocialDistancing.modulemap */,
+				B39933202F07755FD79E7C70F8D512D5 /* Pods-YellAtPeopleWhoViolateSocialDistancing-acknowledgements.markdown */,
+				143A8B6C2089740C3999AFAEC8EB7DB5 /* Pods-YellAtPeopleWhoViolateSocialDistancing-acknowledgements.plist */,
+				0881983CACB2A0EBB75CA39C5CFD6187 /* Pods-YellAtPeopleWhoViolateSocialDistancing-dummy.m */,
+				206A5D835C51BD3696B3CD691B877AF4 /* Pods-YellAtPeopleWhoViolateSocialDistancing-frameworks.sh */,
+				EEA00DF781125BD97FC32ED0F0BC41E8 /* Pods-YellAtPeopleWhoViolateSocialDistancing-Info.plist */,
+				E4CD8E022138D694FB3C1C7412395050 /* Pods-YellAtPeopleWhoViolateSocialDistancing-umbrella.h */,
+				F07922E7004DE74CE81C559308B8696B /* Pods-YellAtPeopleWhoViolateSocialDistancing.debug.xcconfig */,
+				A6594CF4D4466D5A0527CA40DE8E8E3D /* Pods-YellAtPeopleWhoViolateSocialDistancing.release.xcconfig */,
+			);
+			name = "Pods-YellAtPeopleWhoViolateSocialDistancing";
+			path = "Target Support Files/Pods-YellAtPeopleWhoViolateSocialDistancing";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -818,6 +818,14 @@
 				173157DDFCE00406AA008022665D89B3 /* pb_common.h in Headers */,
 				E754F90DC3EEF675EAAB8FC002998153 /* pb_decode.h in Headers */,
 				27A3C9B0293998C714419BE77010EF95 /* pb_encode.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AC73BB0758901D48772AFF0BA1B69A0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BB9FE3070DC42D2078AADC807400E0C /* Pods-YellAtPeopleWhoViolateSocialDistancing-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,14 +860,6 @@
 				5B094E5DD404050DD54CE6FA066BBFBC /* GULSceneDelegateSwizzler_Private.h in Headers */,
 				313471356512F91E92C7F21F4F167313 /* GULSecureCoding.h in Headers */,
 				0B61494D503FEC503654BE4B315198FD /* GULSwizzler.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C67A9CC74062B963C968866EBD059CF4 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B8E3929F2F02EFF402EF93A555743E54 /* Pods-YellWhenNotSocialDistancing-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,29 +934,6 @@
 			productReference = B43874C6CBB50E7134FBEC24BABFE14F /* GoogleUtilities.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		C0874A75F0EE59CEA33B5274E7BA3A0E /* Pods-YellWhenNotSocialDistancing */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7A3A355489F0C84C31E10016E08E3748 /* Build configuration list for PBXNativeTarget "Pods-YellWhenNotSocialDistancing" */;
-			buildPhases = (
-				C67A9CC74062B963C968866EBD059CF4 /* Headers */,
-				9D98B0554E5AB41F3F453053E0A94F01 /* Sources */,
-				E25B8D026CAED0907B10FD137B804C46 /* Frameworks */,
-				70B8D80F5E3CFDBC9145DE7789B181FC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				65824FB3AA4AF32D80B9B8AA03AF3500 /* PBXTargetDependency */,
-				03152F097D98E2E2935CBFBCF311A9A5 /* PBXTargetDependency */,
-				646E34EDA6D671FF4458C2CEAFB0F90F /* PBXTargetDependency */,
-				4E4C97A4DA14262F00CBEF3A7DA3CC97 /* PBXTargetDependency */,
-				CB1FA58DF538B8EFB1CDEEF6DA885444 /* PBXTargetDependency */,
-			);
-			name = "Pods-YellWhenNotSocialDistancing";
-			productName = "Pods-YellWhenNotSocialDistancing";
-			productReference = FE94B7A34DD96484208D6B42032F7CE5 /* Pods_YellWhenNotSocialDistancing.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		D2B5E7DCCBBFB32341D857D01211A1A3 /* nanopb */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6ACB8651607AAD7C8828DB3C1040F9A1 /* Build configuration list for PBXNativeTarget "nanopb" */;
@@ -975,6 +952,29 @@
 			productReference = 06FC5C9CF96D60C50FCD47D339C91951 /* nanopb.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		F495BAD4342C3C1BB0548612002D919F /* Pods-YellAtPeopleWhoViolateSocialDistancing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE5C63D3BCCFBBAC3A8DE5683B6E4F32 /* Build configuration list for PBXNativeTarget "Pods-YellAtPeopleWhoViolateSocialDistancing" */;
+			buildPhases = (
+				3AC73BB0758901D48772AFF0BA1B69A0 /* Headers */,
+				25311136A12BE85EBADBBE4687BEF532 /* Sources */,
+				C541C17A809274E5E81DC9F421E7F477 /* Frameworks */,
+				249950DD5340356C875A8A370BD2F2EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				33698FD4BE9202778DE3668276B80F8E /* PBXTargetDependency */,
+				9A130E61AE54F4F2CA5C12A47817D3D2 /* PBXTargetDependency */,
+				20B1BD990B59405D4A18739E93ECC20D /* PBXTargetDependency */,
+				E0649DE794AB956BCCC2E505AC4B361A /* PBXTargetDependency */,
+				AB2D1CADEC63056C95613EAE80AD4630 /* PBXTargetDependency */,
+			);
+			name = "Pods-YellAtPeopleWhoViolateSocialDistancing";
+			productName = "Pods-YellAtPeopleWhoViolateSocialDistancing";
+			productReference = AD79E3DB01CDE903667AFE79C94ABB78 /* Pods_YellAtPeopleWhoViolateSocialDistancing.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -985,7 +985,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -993,7 +993,7 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = AA26E4E75E4A14ACD52DEE10C8F594D5 /* Products */;
+			productRefGroup = D6A5F13FAEBD6CD4499ABB5E4F1CA9B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1001,13 +1001,20 @@
 				B53D977A951AFC38B21751B706C1DF83 /* GoogleAppMeasurement */,
 				8D7F5D5DD528D21A72DC87ADA5B12E2D /* GoogleUtilities */,
 				D2B5E7DCCBBFB32341D857D01211A1A3 /* nanopb */,
-				C0874A75F0EE59CEA33B5274E7BA3A0E /* Pods-YellWhenNotSocialDistancing */,
+				F495BAD4342C3C1BB0548612002D919F /* Pods-YellAtPeopleWhoViolateSocialDistancing */,
 				2BBF7206D7FAC92C82A042A99C4A98F8 /* PromisesObjC */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		249950DD5340356C875A8A370BD2F2EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		483F3FAC93EE4D6509AE63D1C900C955 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1016,13 +1023,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5155369044295D6EAA4CFF9116CB1C90 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		70B8D80F5E3CFDBC9145DE7789B181FC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1039,6 +1039,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		25311136A12BE85EBADBBE4687BEF532 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF88946F4107A21BF66F7232583433F8 /* Pods-YellAtPeopleWhoViolateSocialDistancing-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EED4FC1F5B89EA5D3867B1FA0A0ADF6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1077,14 +1085,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9D98B0554E5AB41F3F453053E0A94F01 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A4734551B8273688FC2D60DAAC01B667 /* Pods-YellWhenNotSocialDistancing-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F7FBB2E152A27FA3329C19C2D92DB03A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1111,41 +1111,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		03152F097D98E2E2935CBFBCF311A9A5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GoogleAppMeasurement;
-			target = B53D977A951AFC38B21751B706C1DF83 /* GoogleAppMeasurement */;
-			targetProxy = BAF6F3B830BD21F2C7E14FEF85060720 /* PBXContainerItemProxy */;
-		};
-		4E4C97A4DA14262F00CBEF3A7DA3CC97 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = PromisesObjC;
-			target = 2BBF7206D7FAC92C82A042A99C4A98F8 /* PromisesObjC */;
-			targetProxy = 3701E7400EE44C4B0CDFC576B5DBDFCD /* PBXContainerItemProxy */;
-		};
-		646E34EDA6D671FF4458C2CEAFB0F90F /* PBXTargetDependency */ = {
+		20B1BD990B59405D4A18739E93ECC20D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GoogleUtilities;
 			target = 8D7F5D5DD528D21A72DC87ADA5B12E2D /* GoogleUtilities */;
-			targetProxy = 934064983E2584855528503ECCD06EF6 /* PBXContainerItemProxy */;
+			targetProxy = F71BFDA1A388A1223CC6FC8FD0A23790 /* PBXContainerItemProxy */;
 		};
-		65824FB3AA4AF32D80B9B8AA03AF3500 /* PBXTargetDependency */ = {
+		33698FD4BE9202778DE3668276B80F8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Google-Mobile-Ads-SDK";
 			target = FEA3B3A570634836C0457F3D7CEF1699 /* Google-Mobile-Ads-SDK */;
-			targetProxy = FF09DA6AFD50A8897883B03DC18CD1A1 /* PBXContainerItemProxy */;
+			targetProxy = ED894AB0F3904564A48C24175BBFCDFF /* PBXContainerItemProxy */;
+		};
+		9A130E61AE54F4F2CA5C12A47817D3D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GoogleAppMeasurement;
+			target = B53D977A951AFC38B21751B706C1DF83 /* GoogleAppMeasurement */;
+			targetProxy = 148846791A54A1FE2859682ABFD588B3 /* PBXContainerItemProxy */;
+		};
+		AB2D1CADEC63056C95613EAE80AD4630 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = nanopb;
+			target = D2B5E7DCCBBFB32341D857D01211A1A3 /* nanopb */;
+			targetProxy = 2A4732FE0EC7B981EEB92A7940513720 /* PBXContainerItemProxy */;
 		};
 		BA68774B6032035666AAA93333CFB516 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GoogleAppMeasurement;
 			target = B53D977A951AFC38B21751B706C1DF83 /* GoogleAppMeasurement */;
 			targetProxy = 4870387674177323A819CA2112487CB5 /* PBXContainerItemProxy */;
-		};
-		CB1FA58DF538B8EFB1CDEEF6DA885444 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = nanopb;
-			target = D2B5E7DCCBBFB32341D857D01211A1A3 /* nanopb */;
-			targetProxy = DEC14C143008A1D87AE96914443A042D /* PBXContainerItemProxy */;
 		};
 		CC76530680DE1B1A0F3BD1A001678DA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1158,6 +1152,12 @@
 			name = PromisesObjC;
 			target = 2BBF7206D7FAC92C82A042A99C4A98F8 /* PromisesObjC */;
 			targetProxy = EBF1E3F5EC261AEFA74E46FF74CC8358 /* PBXContainerItemProxy */;
+		};
+		E0649DE794AB956BCCC2E505AC4B361A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PromisesObjC;
+			target = 2BBF7206D7FAC92C82A042A99C4A98F8 /* PromisesObjC */;
+			targetProxy = A6E5683A473C9430708A7C0C4B0EF15D /* PBXContainerItemProxy */;
 		};
 		FE6B75331D1E70203F7D32325556D785 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1220,66 +1220,6 @@
 			};
 			name = Release;
 		};
-		1422B121EAEAEA11307496903FA623C6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
 		21F4C3707FB40DC87D1AF3AED27D5DE5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1641404A09FD2F1040F583DB52F5E2A /* nanopb.release.xcconfig */;
@@ -1316,9 +1256,9 @@
 			};
 			name = Release;
 		};
-		433DE664292AE337FDB9468B474F7A48 /* Release */ = {
+		2B40E6E73F164B5593C4F976B136A42F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2A819651D2B0B8838A3A32717D98081 /* Pods-YellWhenNotSocialDistancing.release.xcconfig */;
+			baseConfigurationReference = F07922E7004DE74CE81C559308B8696B /* Pods-YellAtPeopleWhoViolateSocialDistancing.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1331,16 +1271,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-YellWhenNotSocialDistancing/Pods-YellWhenNotSocialDistancing-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-YellAtPeopleWhoViolateSocialDistancing/Pods-YellAtPeopleWhoViolateSocialDistancing-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-YellWhenNotSocialDistancing/Pods-YellWhenNotSocialDistancing.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-YellAtPeopleWhoViolateSocialDistancing/Pods-YellAtPeopleWhoViolateSocialDistancing.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -1349,11 +1289,10 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		66F7D33C843FEAF5535B43F51431550C /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1494,44 +1433,6 @@
 			};
 			name = Release;
 		};
-		B86C58F8D30C44E55E25A5D5E12991CE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8591D056E473278FD5689AC0ABCB485D /* Pods-YellWhenNotSocialDistancing.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-YellWhenNotSocialDistancing/Pods-YellWhenNotSocialDistancing-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-YellWhenNotSocialDistancing/Pods-YellWhenNotSocialDistancing.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		DDEE4BE871225A98058457B8E693EC03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF0673B13146215E9318E92579292383 /* GoogleAppMeasurement.debug.xcconfig */;
@@ -1548,7 +1449,7 @@
 			};
 			name = Debug;
 		};
-		ED7888FA6713EABBF66D26A8003AD1CA /* Debug */ = {
+		DFD9D19FEEBF98DE271D7FBABCB845B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1599,7 +1500,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1646,6 +1547,105 @@
 			};
 			name = Debug;
 		};
+		F5F04600F5626DC980F02790D1ED2C19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		FD3B3930FEB959E97587C4D70CBEED98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6594CF4D4466D5A0527CA40DE8E8E3D /* Pods-YellAtPeopleWhoViolateSocialDistancing.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-YellAtPeopleWhoViolateSocialDistancing/Pods-YellAtPeopleWhoViolateSocialDistancing-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-YellAtPeopleWhoViolateSocialDistancing/Pods-YellAtPeopleWhoViolateSocialDistancing.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1661,8 +1661,8 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ED7888FA6713EABBF66D26A8003AD1CA /* Debug */,
-				1422B121EAEAEA11307496903FA623C6 /* Release */,
+				DFD9D19FEEBF98DE271D7FBABCB845B5 /* Debug */,
+				F5F04600F5626DC980F02790D1ED2C19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1672,15 +1672,6 @@
 			buildConfigurations = (
 				66F7D33C843FEAF5535B43F51431550C /* Debug */,
 				21F4C3707FB40DC87D1AF3AED27D5DE5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7A3A355489F0C84C31E10016E08E3748 /* Build configuration list for PBXNativeTarget "Pods-YellWhenNotSocialDistancing" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B86C58F8D30C44E55E25A5D5E12991CE /* Debug */,
-				433DE664292AE337FDB9468B474F7A48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1699,6 +1690,15 @@
 			buildConfigurations = (
 				F0CFFB969944D84E532C10A3855EE53F /* Debug */,
 				092BAE0924411F94D9993042CBA94207 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE5C63D3BCCFBBAC3A8DE5683B6E4F32 /* Build configuration list for PBXNativeTarget "Pods-YellAtPeopleWhoViolateSocialDistancing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B40E6E73F164B5593C4F976B136A42F /* Debug */,
+				FD3B3930FEB959E97587C4D70CBEED98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
