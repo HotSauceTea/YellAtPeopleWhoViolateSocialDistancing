@@ -1,6 +1,5 @@
 //
 //  CameraViewController.swift
-//  SocialDistancer_v7
 //
 //
 
@@ -148,8 +147,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     
     var motionManager = CMMotionManager()
     
-    private var outputSynchronizer: AVCaptureDataOutputSynchronizer?
-    
     var windowOrientation: UIInterfaceOrientation {
         return view.window?.windowScene?.interfaceOrientation ?? .unknown
     }
@@ -210,7 +207,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         didSet {
             self.updateDistance()
             self.lastARDistanceUpdateTime = CACurrentMediaTime()
-            print("updated ARDistance")
         }
     }
     
@@ -232,8 +228,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         } else {
             self.distanceString = "Distance: \(Int(self.distance/12))'\(Int(self.distance)%12)\""
         }
-        print(self.distanceString)
-        print(self.distance)
         DispatchQueue.main.async {
             self.distanceDisplay.text = self.distanceString
         }
@@ -252,10 +246,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     }
     
     @IBOutlet weak var distanceDisplay: UILabel!
-    
-    
-    
-    // MARK: View Controller Life Cycle
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -313,42 +303,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         }
         else {
             print("Device motion unavailable");
-        }
-        
-        // Disable the UI. Enable the UI later, if and only if the session starts running.
-        
-        // Set up the video preview view.
-        //previewView.session = session
-        /*
-         Check the video authorization status. Video access is required and audio
-         access is optional. If the user denies audio access, AVCam won't
-         record audio during movie recording.
-         */
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            // The user has previously granted access to the camera.
-            break
-            
-        case .notDetermined:
-            /*
-             The user has not yet been presented with the option to grant
-             video access. Suspend the session queue to delay session
-             setup until the access request has completed.
-             
-             Note that audio access will be implicitly requested when we
-             create an AVCaptureDeviceInput for audio during session setup.
-             */
-            sessionQueue.suspend()
-            AVCaptureDevice.requestAccess(for: .video, completionHandler: { granted in
-                if !granted {
-                    self.setupResult = .notAuthorized
-                }
-                self.sessionQueue.resume()
-            })
-            
-        default:
-            // The user has previously denied access.
-            setupResult = .notAuthorized
         }
         
         DispatchQueue.main.async{
@@ -422,104 +376,15 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         case configurationFailed
     }
     
-    
     // Communicate with the session and other session objects on this queue.
     private let sessionQueue = DispatchQueue(label: "session queue")
     
     private var setupResult: SessionSetupResult = .success
     
-    @objc dynamic var videoDeviceInput: AVCaptureDeviceInput!
-    
     @IBOutlet private weak var previewView: PreviewView!
-    
     
     func yell() {
         let utterance = AVSpeechUtterance(string: DataViewController.sayThisText)
         self.synthesizer.speak(utterance)
-    }
-    
-    
-    @IBOutlet private weak var cameraUnavailableLabel: UILabel!
-    
-    private let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
-                                                                               mediaType: .video, position: .unspecified)
-    
-    private func focus(with focusMode: AVCaptureDevice.FocusMode,
-                       exposureMode: AVCaptureDevice.ExposureMode,
-                       at devicePoint: CGPoint,
-                       monitorSubjectAreaChange: Bool) {
-        
-        sessionQueue.async {
-            let device = self.videoDeviceInput.device
-            do {
-                try device.lockForConfiguration()
-                
-                /*
-                 Setting (focus/exposure)PointOfInterest alone does not initiate a (focus/exposure) operation.
-                 Call set(Focus/Exposure)Mode() to apply the new point of interest.
-                 */
-                if device.isFocusPointOfInterestSupported && device.isFocusModeSupported(focusMode) {
-                    device.focusPointOfInterest = devicePoint
-                    device.focusMode = focusMode
-                }
-                
-                if device.isExposurePointOfInterestSupported && device.isExposureModeSupported(exposureMode) {
-                    device.exposurePointOfInterest = devicePoint
-                    device.exposureMode = exposureMode
-                }
-                
-                device.isSubjectAreaChangeMonitoringEnabled = monitorSubjectAreaChange
-                device.unlockForConfiguration()
-            } catch {
-                print("Could not lock device for configuration: \(error)")
-            }
-        }
-    }
-    
-    private var keyValueObservations = [NSKeyValueObservation]()
-    /// - Tag: ObserveInterruption
-
-    
-
-    
-    @objc
-    func subjectAreaDidChange(notification: NSNotification) {
-        let devicePoint = CGPoint(x: 0.5, y: 0.5)
-        focus(with: .continuousAutoFocus, exposureMode: .continuousAutoExposure, at: devicePoint, monitorSubjectAreaChange: false)
-    }
-    
-    /// - Tag: HandleSystemPressure
-    private func setRecommendedFrameRateRangeForPressureState(systemPressureState: AVCaptureDevice.SystemPressureState) {
-        /*
-         The frame rates used here are only for demonstration purposes.
-         Your frame rate throttling may be different depending on your app's camera configuration.
-         */
-        let pressureLevel = systemPressureState.level
-        if pressureLevel == .serious || pressureLevel == .critical {
-            do {
-                try self.videoDeviceInput.device.lockForConfiguration()
-                print("WARNING: Reached elevated system pressure level: \(pressureLevel). Throttling frame rate.")
-                self.videoDeviceInput.device.activeVideoMinFrameDuration = CMTime(value: 1, timescale: 20)
-                self.videoDeviceInput.device.activeVideoMaxFrameDuration = CMTime(value: 1, timescale: 15)
-                self.videoDeviceInput.device.unlockForConfiguration()
-            } catch {
-                print("Could not lock device for configuration: \(error)")
-            }
-        } else if pressureLevel == .shutdown {
-            print("Session stopped running due to shutdown system pressure level.")
-        }
-    }
-    
-    @objc
-    private func sessionInterruptionEnded(notification: NSNotification) {
-        if !cameraUnavailableLabel.isHidden {
-            UIView.animate(withDuration: 0.25,
-                           animations: {
-                            self.cameraUnavailableLabel.alpha = 0
-            }, completion: { _ in
-                self.cameraUnavailableLabel.isHidden = true
-            }
-            )
-        }
     }
 }
