@@ -78,7 +78,7 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         } else {
             segmentedControlButton.selectedSegmentIndex = 1
         }
-        self.heightPicker.selectRow(DataViewController.chosenRow, inComponent: 0, animated: false)
+        self.heightPicker.selectRow(DataViewController.chosenRow, inComponent: 1, animated: false)
     
     }
     
@@ -351,61 +351,22 @@ class CameraViewController: UIViewController, ARSessionDelegate {
             setupResult = .notAuthorized
         }
         
-        /*
-         Setup the capture session.
-         In general, it's not safe to mutate an AVCaptureSession or any of its
-         inputs, outputs, or connections from multiple threads at the same time.
-         
-         Don't perform these tasks on the main queue because
-         AVCaptureSession.startRunning() is a blocking call, which can
-         take a long time. Dispatch session setup to the sessionQueue, so
-         that the main queue isn't blocked, which keeps the UI responsive.
-         */
-        DispatchQueue.main.async {
-            self.spinner = UIActivityIndicatorView(style: .large)
-            self.spinner.color = UIColor.yellow
-            self.arView.addSubview(self.spinner)
-        }
         DispatchQueue.main.async{
             self.distanceDisplay.text = self.distanceString
         }
-        print("finished viewdidload")
     }
     
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         var minDistance = 100000.0
         if self.ARSupported {
             for anchor in anchors {
-                print("anchor")
                 guard let bodyAnchor = anchor as? ARBodyAnchor else { continue }
-                //guard let sceneView = self.arView as? ARSKView else {
-                //   return
-                //}
-                print("here")
-                // Update the position of the character anchor's position.
-                //let bodyPosition = simd_make_float3(bodyAnchor.transform.columns.3)
-                //let anchorPosition = anchor.transform.columns.3
-                //let cameraPosition = sceneView.session.currentFrame?.camera.transform.columns.3
-                //let cameraToAnchor = cameraPosition - anchorPosition
-                //let distance = length(cameraToAnchor)
-                //let distance = Double(simd_distance(bodyAnchor.transform.columns.3, (arView.session.currentFrame?.camera.transform.columns.3)!))
                 let zDistance = Double(abs(bodyAnchor.transform.columns.3.z - (arView.session.currentFrame?.camera.transform.columns.3.z)!))
                 let xDistance = Double(abs(bodyAnchor.transform.columns.3.x - (arView.session.currentFrame?.camera.transform.columns.3.x)!))
                 let distance = sqrt(pow(xDistance, 2) + pow(zDistance, 2))
-                print("body anchor \(bodyAnchor.transform.columns.3)")
-                print("camera position \(arView.session.currentFrame?.camera.transform.columns.3)!)")
-                print("distance: \(distance)")
-                print("zDistance \(zDistance)")
-                //let bodyAnchorVec = bodyAnchor.transform.columns
-                //let cameraVec = arView.session.currentFrame?.camera.transform.columns
-                //let xx = Double(bodyAnchorVec.1)
-                //var distance = pow(bodyAnchorVec.1 - cameraVec!.1,2) + pow(bodyAnchorVec.z - cameraVec.z!,2)
-                //distance = sqrt(distance)
                 if distance < minDistance {
                     minDistance = distance
                 }
-                // Also copy over the rotation of the body anchor, because the skeleton's pose
-                // in the world is relative to the body anchor's rotation.
             }
         }
         self.ARDistance = minDistance * 39.3701 //convert meters to inches
@@ -417,11 +378,7 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         sessionQueue.async {
             switch self.setupResult {
             case .success:
-                // Only setup observers and start the session if setup succeeded.
-                self.addObservers()
-                self.captureSession.startRunning()
-                self.isSessionRunning = self.captureSession.isRunning
-                
+                print("good job")
             case .notAuthorized:
                 DispatchQueue.main.async {
                     let changePrivacySetting = "AVCam doesn't have permission to use the camera, please change privacy settings"
@@ -457,19 +414,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
                 }
             }
         }
-        print("finished viewwillappear")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        sessionQueue.async {
-            if self.setupResult == .success {
-                self.captureSession.stopRunning()
-                self.isSessionRunning = self.captureSession.isRunning
-                self.removeObservers()
-            }
-        }
-        
-        super.viewWillDisappear(animated)
     }
 
     private enum SessionSetupResult {
@@ -478,8 +422,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         case configurationFailed
     }
     
-    private let captureSession = AVCaptureSession()
-    private var isSessionRunning = false
     
     // Communicate with the session and other session objects on this queue.
     private let sessionQueue = DispatchQueue(label: "session queue")
@@ -493,38 +435,8 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     
     func yell() {
         let utterance = AVSpeechUtterance(string: DataViewController.sayThisText)
-        print("Yelling: \(DataViewController.sayThisText)")
-        //utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Fred-compact")
-        //print(utterance.voice)
-        //utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
         self.synthesizer.speak(utterance)
     }
-    
-    @IBAction private func resumeInterruptedSession(_ resumeButton: UIButton) {
-        sessionQueue.async {
-            /*
-             The session might fail to start running, for example, if a phone or FaceTime call is still
-             using audio or video. This failure is communicated by the session posting a
-             runtime error notification. To avoid repeatedly failing to start the session,
-             only try to restart the session in the error handler if you aren't
-             trying to resume the session.
-             */
-            self.captureSession.startRunning()
-            self.isSessionRunning = self.captureSession.isRunning
-            if !self.captureSession.isRunning {
-                DispatchQueue.main.async {
-                    let message = NSLocalizedString("Unable to resume", comment: "Alert message when unable to resume the session running")
-                    let alertController = UIAlertController(title: "AVCam", message: message, preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil)
-                    alertController.addAction(cancelAction)
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            } else {
-            }
-        }
-    }
-    
-    // MARK: Device Configuration
     
     
     @IBOutlet private weak var cameraUnavailableLabel: UILabel!
@@ -566,75 +478,14 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     
     private var keyValueObservations = [NSKeyValueObservation]()
     /// - Tag: ObserveInterruption
-    private func addObservers() {
-        let keyValueObservation = captureSession.observe(\.isRunning, options: .new) { _, change in
-            guard change.newValue != nil else { return }
-        }
-        keyValueObservations.append(keyValueObservation)
-        
-        let systemPressureStateObservation = observe(\.videoDeviceInput.device.systemPressureState, options: .new) { _, change in
-            guard let systemPressureState = change.newValue else { return }
-            self.setRecommendedFrameRateRangeForPressureState(systemPressureState: systemPressureState)
-        }
-        keyValueObservations.append(systemPressureStateObservation)
-        /*
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(subjectAreaDidChange),
-                                               name: .AVCaptureDeviceSubjectAreaDidChange,
-                                               object: videoDeviceInput.device)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(sessionRuntimeError),
-                                               name: .AVCaptureSessionRuntimeError,
-                                               object: session)
-        */
-        /*
-         A session can only run when the app is full screen. It will be interrupted
-         in a multi-app layout, introduced in iOS 9, see also the documentation of
-         AVCaptureSessionInterruptionReason. Add observers to handle these session
-         interruptions and show a preview is paused message. See the documentation
-         of AVCaptureSessionWasInterruptedNotification for other interruption reasons.
-         */
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(sessionWasInterrupted),
-                                               name: .AVCaptureSessionWasInterrupted,
-                                               object: session)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(sessionInterruptionEnded),
-                                               name: .AVCaptureSessionInterruptionEnded,
-                                               object: session)
-    }
+
     
-    private func removeObservers() {
-        NotificationCenter.default.removeObserver(self)
-        
-        for keyValueObservation in keyValueObservations {
-            keyValueObservation.invalidate()
-        }
-        keyValueObservations.removeAll()
-    }
+
     
     @objc
     func subjectAreaDidChange(notification: NSNotification) {
         let devicePoint = CGPoint(x: 0.5, y: 0.5)
         focus(with: .continuousAutoFocus, exposureMode: .continuousAutoExposure, at: devicePoint, monitorSubjectAreaChange: false)
-    }
-    
-    /// - Tag: HandleRuntimeError
-    @objc
-    func sessionRuntimeError(notification: NSNotification) {
-        guard let error = notification.userInfo?[AVCaptureSessionErrorKey] as? AVError else { return }
-        
-        print("Capture session runtime error: \(error)")
-        // If media services were reset, and the last start succeeded, restart the session.
-        if error.code == .mediaServicesWereReset {
-            sessionQueue.async {
-                if self.isSessionRunning {
-                    self.captureSession.startRunning()
-                    self.isSessionRunning = self.captureSession.isRunning
-                }
-            }
-        }
     }
     
     /// - Tag: HandleSystemPressure
@@ -659,44 +510,8 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         }
     }
     
-    /// - Tag: HandleInterruption
-    
-    @objc
-    private func sessionWasInterrupted(notification: NSNotification) {
-        /*
-         In some scenarios you want to enable the user to resume the session.
-         For example, if music playback is initiated from Control Center while
-         using AVCam, then the user can let AVCam resume
-         the session running, which will stop music playback. Note that stopping
-         music playback in Control Center will not automatically resume the session.
-         Also note that it's not always possible to resume, see `resumeInterruptedSession(_:)`.
-         */
-         
-        if let userInfoValue = notification.userInfo?[AVCaptureSessionInterruptionReasonKey] as AnyObject?,
-            let reasonIntegerValue = userInfoValue.integerValue,
-            let reason = AVCaptureSession.InterruptionReason(rawValue: reasonIntegerValue) {
-            print("Capture session was interrupted with reason \(reason)")
-            
-            var showResumeButton = false
-            if reason == .audioDeviceInUseByAnotherClient || reason == .videoDeviceInUseByAnotherClient {
-                showResumeButton = true
-            } else if reason == .videoDeviceNotAvailableWithMultipleForegroundApps {
-                // Fade-in a label to inform the user that the camera is unavailable.
-                cameraUnavailableLabel.alpha = 0
-                cameraUnavailableLabel.isHidden = false
-                UIView.animate(withDuration: 0.25) {
-                    self.cameraUnavailableLabel.alpha = 1
-                }
-            } else if reason == .videoDeviceNotAvailableDueToSystemPressure {
-                print("Session stopped running due to shutdown system pressure level.")
-            }
-        }
-    }
-    
     @objc
     private func sessionInterruptionEnded(notification: NSNotification) {
-        print("Capture session interruption ended")
-        
         if !cameraUnavailableLabel.isHidden {
             UIView.animate(withDuration: 0.25,
                            animations: {
