@@ -3,22 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F8F973E24F6FD0100AAAC7F /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8F973D24F6FD0100AAAC7F /* DataViewController.swift */; };
 		0FC835CB24C52378000CB1AB /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C324C52377000CB1AB /* PreviewView.swift */; };
 		0FC835CC24C52378000CB1AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835C424C52377000CB1AB /* LaunchScreen.storyboard */; };
 		0FC835CD24C52378000CB1AB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C524C52377000CB1AB /* CameraViewController.swift */; };
 		0FC835CE24C52378000CB1AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C624C52377000CB1AB /* AppDelegate.swift */; };
 		0FC835CF24C52378000CB1AB /* PhotoCaptureDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C724C52377000CB1AB /* PhotoCaptureDelegates.swift */; };
 		0FC835D024C52378000CB1AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835C824C52377000CB1AB /* Assets.xcassets */; };
-		0FC835D124C52378000CB1AB /* ItemSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835C924C52377000CB1AB /* ItemSelectionViewController.swift */; };
 		0FC835D224C52378000CB1AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC835CA24C52377000CB1AB /* Main.storyboard */; };
 		0FC835D424C52771000CB1AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC835D324C52771000CB1AB /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F8F973D24F6FD0100AAAC7F /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		0FC835AB24C52302000CB1AB /* YellAtPeopleWhoViolateSocialDistancing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YellAtPeopleWhoViolateSocialDistancing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC835BC24C52303000CB1AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FC835C224C52376000CB1AB /* YellAtPeopleWhoViolateSocialDistancing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YellAtPeopleWhoViolateSocialDistancing-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -28,7 +29,6 @@
 		0FC835C624C52377000CB1AB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FC835C724C52377000CB1AB /* PhotoCaptureDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegates.swift; sourceTree = "<group>"; };
 		0FC835C824C52377000CB1AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0FC835C924C52377000CB1AB /* ItemSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSelectionViewController.swift; sourceTree = "<group>"; };
 		0FC835CA24C52377000CB1AB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0FC835D324C52771000CB1AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,8 +69,8 @@
 				0FC835C624C52377000CB1AB /* AppDelegate.swift */,
 				0FC835C824C52377000CB1AB /* Assets.xcassets */,
 				0FC835C524C52377000CB1AB /* CameraViewController.swift */,
-				0FC835C924C52377000CB1AB /* ItemSelectionViewController.swift */,
 				0FC835C424C52377000CB1AB /* LaunchScreen.storyboard */,
+				0F8F973D24F6FD0100AAAC7F /* DataViewController.swift */,
 				0FC835CA24C52377000CB1AB /* Main.storyboard */,
 				0FC835C724C52377000CB1AB /* PhotoCaptureDelegates.swift */,
 				0FC835C324C52377000CB1AB /* PreviewView.swift */,
@@ -159,10 +159,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FC835CE24C52378000CB1AB /* AppDelegate.swift in Sources */,
+				0F8F973E24F6FD0100AAAC7F /* DataViewController.swift in Sources */,
 				0FC835CB24C52378000CB1AB /* PreviewView.swift in Sources */,
 				0FC835CF24C52378000CB1AB /* PhotoCaptureDelegates.swift in Sources */,
 				0FC835CD24C52378000CB1AB /* CameraViewController.swift in Sources */,
-				0FC835D124C52378000CB1AB /* ItemSelectionViewController.swift in Sources */,
 				0FC835D424C52771000CB1AB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
