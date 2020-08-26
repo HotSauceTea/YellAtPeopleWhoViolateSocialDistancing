@@ -50,7 +50,6 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     @IBAction func textFieldChanged(_ sender: UITextField) {
         DataViewController.sayThisText = self.sayThisTextField.text ?? ""
-        print(DataViewController.sayThisText)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -97,21 +96,15 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        print(component)
-        print(row)
         return pickerData[component][row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         DataViewController.chosenRow = row
-        print("New DataViewController.chosenRow: \(DataViewController.chosenRow)")
         let val = pickerData[component][row]
-        print("row:\(row) val:\(val)")
         let valArr = val.components(separatedBy: "'")
         DataViewController.chosenFeet = valArr[0]
         DataViewController.chosenInches = String(valArr[1].dropLast())
-        print("feet: \(DataViewController.chosenFeet)")
-        print("inches: \(DataViewController.chosenInches)")
     }
  
     func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
@@ -154,15 +147,12 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     var useARDistanceMethod = true
 
     @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
-        print("here")
         if self.ARSupported {
             switch distanceMethodSegmentedControl.selectedSegmentIndex {
                 case 0:
                     self.useARDistanceMethod = true
-                    print("switch to AR")
                 case 1:
                     self.useARDistanceMethod = false
-                    print("switch to trig")
                 default:
                     self.useARDistanceMethod = true
             }
@@ -207,8 +197,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     }
     
     func updateDistance() {
-        print("Last UPdated Time: \(lastARDistanceUpdateTime)")
-        print("Time: \(CACurrentMediaTime())")
         if self.useARDistanceMethod {
             self.distance = self.ARDistance
         } else {
@@ -269,7 +257,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         
         // Ensure to keep a strong reference to the motion manager otherwise you won't get updates
         
-        print(motionManager.isDeviceMotionAvailable)
         if ARSupported {
             distanceMethodSegmentedControl.selectedSegmentIndex = 0
             self.useARDistanceMethod = true
@@ -277,9 +264,8 @@ class CameraViewController: UIViewController, ARSessionDelegate {
             distanceMethodSegmentedControl.selectedSegmentIndex = 1
             self.useARDistanceMethod = false
         }
-        motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
         if motionManager.isDeviceMotionAvailable == true {
-
+            motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
             motionManager.deviceMotionUpdateInterval = 0.1;
 
             let queue = OperationQueue()
