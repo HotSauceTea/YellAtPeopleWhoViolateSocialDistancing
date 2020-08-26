@@ -66,7 +66,6 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.heightPicker.dataSource = self
         self.sayThisTextField.delegate = self
         self.sayThisTextField.placeholder = DataViewController.sayThisText
-        //pickerData = [["0", "1", "2", "3", "4", "5", "6", "7"], ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]]
         for feet in 0...7 {
             for inches in 0...11 {
                 pickerData[1].append("\(feet)'\(inches)\"")
@@ -120,9 +119,6 @@ class DataViewController : UIViewController, UIPickerViewDelegate, UIPickerViewD
 }
     
     func getHeight() -> Int {
-        //print("calculating height")
-        //print(DataViewController.chosenFeet)
-        //print((Int(DataViewController.chosenFeet) ?? 0) * 12)
         var height = (Int(DataViewController.chosenFeet) ?? 0) * 12 + (Int(DataViewController.chosenInches) ?? 0)
         if (DataViewController.useHumanHeight) {
             height = Int(Double(height) * DataViewController.shoulderBodyProportion)
@@ -215,10 +211,8 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         print("Time: \(CACurrentMediaTime())")
         if self.useARDistanceMethod {
             self.distance = self.ARDistance
-            //print("updated distance b/c AR")
         } else {
             self.distance = tan(self.pitch) * Double(self.dataViewController.getHeight())
-            //print("updated distance b/c trig")
         }
         if self.distance < 0 {
             self.distanceString = "Distance: ???"
@@ -251,7 +245,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         super.viewDidAppear(animated)
         self.arView.session.delegate = self
         self.ARSupported = ARBodyTrackingConfiguration.isSupported
-        //self.ARSupported = false
 
 
         // Run a body tracking configration.
@@ -267,7 +260,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.ARSupported = false
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
