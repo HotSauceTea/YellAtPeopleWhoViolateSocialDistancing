@@ -2,6 +2,10 @@
 //  CameraViewController.swift
 //  YellAtPeopleWhoViolateSocialDistancing
 //
+// Controls the main view, and logic for when to yell
+// Warning! A few weeks ago I didn't know how to make an App.
+// You'll see as soon as you start reading the code
+// I have hacked this together using a combinations of different tutorials and stack overflow posts.
 //
 
 import UIKit
@@ -14,61 +18,15 @@ import ARKit
 
 class CameraViewController: UIViewController, ARSessionDelegate {
 
-    @IBOutlet weak var arView: ARView!
-    
     let dataViewController = DataViewController()
-    
     let synthesizer = AVSpeechSynthesizer()
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    private var spinner: UIActivityIndicatorView!
-    
     var motionManager = CMMotionManager()
-    
     var windowOrientation: UIInterfaceOrientation {
         return view.window?.windowScene?.interfaceOrientation ?? .unknown
     }
-    
     var ARSupported = true
-    
-    @IBOutlet weak var distanceMethodSegmentedControl: UISegmentedControl!
-    
     var useARDistanceMethod = true
-
-    @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
-        if self.ARSupported {
-            switch distanceMethodSegmentedControl.selectedSegmentIndex {
-                case 0:
-                    self.useARDistanceMethod = true
-                case 1:
-                    self.useARDistanceMethod = false
-                default:
-                    self.useARDistanceMethod = true
-            }
-        } else {
-            distanceMethodSegmentedControl.selectedSegmentIndex = 1
-            self.useARDistanceMethod = false
-        }
-    }
-    
     var yellingEnabled = false
-    @IBAction func pressEnableYelling(_ sender: Any) {
-        self.yellingEnabled = true
-        
-    }
-    
-    @IBAction func releaseEnableYelling(_ sender: Any) {
-        self.yellingEnabled = false
-        self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-    }
-    
-    @IBAction func releaseEnableYellingDrag(_ sender: UIButton) {
-        self.yellingEnabled = false
-        self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-    }
-    
     let safeDistance = 6 * 12
     private var distanceString = "Distance: ???"
     private var distance = 99999.0
@@ -86,8 +44,73 @@ class CameraViewController: UIViewController, ARSessionDelegate {
             self.lastARDistanceUpdateTime = CACurrentMediaTime()
         }
     }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    // Communicate with the session and other session objects on this queue.
+    private let sessionQueue = DispatchQueue(label: "session queue")
+    
+    private var setupResult: SessionSetupResult = .success
+
+    @IBOutlet weak var arView: ARView!
+    
+    @IBOutlet private weak var previewView: PreviewView!
+    
+    @IBOutlet weak var distanceMethodSegmentedControl: UISegmentedControl!
+
+    @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
+        // toggle between AR distance and Trig distance methods
+        if self.ARSupported {
+            switch distanceMethodSegmentedControl.selectedSegmentIndex {
+                case 0:
+                    self.useARDistanceMethod = true
+                case 1:
+                    self.useARDistanceMethod = false
+                default:
+                    self.useARDistanceMethod = true
+            }
+        } else {
+            distanceMethodSegmentedControl.selectedSegmentIndex = 1
+            self.useARDistanceMethod = false
+        }
+    }
+    
+    @IBAction func pressEnableYelling(_ sender: Any) {
+        self.yellingEnabled = true
+        
+    }
+    
+    @IBAction func releaseEnableYelling(_ sender: Any) {
+        self.yellingEnabled = false
+        self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+    }
+    
+    @IBAction func releaseEnableYellingDrag(_ sender: UIButton) {
+        self.yellingEnabled = false
+        self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+    }
+    
+    @IBOutlet weak var distanceDisplay: UILabel!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // start Body tracking
+        super.viewDidAppear(animated)
+        self.arView.session.delegate = self
+        self.ARSupported = ARBodyTrackingConfiguration.isSupported
+
+        // Run a body tracking configration.
+        if self.ARSupported {
+            let configuration = ARBodyTrackingConfiguration()
+            arView.session.run(configuration)
+        } else {
+            let configuration = ARWorldTrackingConfiguration()
+            arView.session.run(configuration)
+        }
+    }
     
     func updateDistance() {
+        // updates the distance using the chosen distance method
         if self.useARDistanceMethod {
             self.distance = self.ARDistance
         } else {
@@ -118,26 +141,8 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         }
     }
     
-    @IBOutlet weak var distanceDisplay: UILabel!
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.arView.session.delegate = self
-        self.ARSupported = ARBodyTrackingConfiguration.isSupported
-
-
-        // Run a body tracking configration.
-        if self.ARSupported {
-            let configuration = ARBodyTrackingConfiguration()
-            arView.session.run(configuration)
-        } else {
-            let configuration = ARWorldTrackingConfiguration()
-            arView.session.run(configuration)
-        }
-        
-    }
-    
     override func viewDidLoad() {
+        // basic setup
         super.viewDidLoad()
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
@@ -244,13 +249,6 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         case notAuthorized
         case configurationFailed
     }
-    
-    // Communicate with the session and other session objects on this queue.
-    private let sessionQueue = DispatchQueue(label: "session queue")
-    
-    private var setupResult: SessionSetupResult = .success
-    
-    @IBOutlet private weak var previewView: PreviewView!
     
     func yell() {
         let utterance = AVSpeechUtterance(string: DataViewController.sayThisText)
