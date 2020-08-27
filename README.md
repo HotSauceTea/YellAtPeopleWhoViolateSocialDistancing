@@ -6,16 +6,16 @@ This is an app that computes the distance to other people, and if they come with
 
 There are two different distance detection methods. Here's how to use each (and how they work):
 1. AR  
-This works by using Apples Augmented Reality kit. This can detect people, then measure the distance to them. To use this, just point the phone in the general direction of people. The app will report the distance to the closest person.
+This works by using Apple's Augmented Reality kit. This can detect people, then measure the distance to them. To use this, just point the phone in the general direction of people. The app will report the distance to the closest person.
 
 2. Trig based  
 To use this, point the + sign on the screen at the feet of the person that you want to measure the distance to. You also need to have input your height in the "Setup Data" screen. The app uses the angle of the phone, and the height that it's at (it assumes that you hold the phone at shoulder height, which is on average .82 of your full height).
 
 ## Warnings:
-1. AR based distance detection is most accurate indoors and at close distances.
+1. AR based distance detection is most accurate indoors and at close distances. When used outside, it may incorrectly report the distance to people who are far away (but it is accurate when they're close, the main use case of this app)
 2. Trig based distance detection will not work well on unlevel ground
 
-## Disclaimer
+## Boring Legal Disclaimer
 1. This is for entertainment only. It cannot prevent coronavirus. 
 
 ## Requirements:
