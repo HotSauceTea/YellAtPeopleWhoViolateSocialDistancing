@@ -58,7 +58,8 @@ class CameraViewController: UIViewController, ARSessionDelegate {
     @IBOutlet private weak var previewView: PreviewView!
     
     @IBOutlet weak var distanceMethodSegmentedControl: UISegmentedControl!
-
+    @IBOutlet var TargetPlus: UILabel!
+    
     @IBAction func distanceMethodSegmentedControlUpdate(_ sender: Any) {
         // toggle between AR distance and Trig distance methods
         if self.ARSupported {
@@ -150,6 +151,11 @@ class CameraViewController: UIViewController, ARSessionDelegate {
         } catch {
             print("uh oh, audio went wrong")
         }
+        //self.TargetPlus.center = self.arView.center
+        //self.TargetPlus.layer.zPosition = 1
+        //self.TargetPlus.textColor = UIColor.black
+        NSLayoutConstraint(item: self.TargetPlus, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: arView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
+        print("TargetPlus.center \(self.TargetPlus.center)")
         
         // Ensure to keep a strong reference to the motion manager otherwise you won't get updates
         

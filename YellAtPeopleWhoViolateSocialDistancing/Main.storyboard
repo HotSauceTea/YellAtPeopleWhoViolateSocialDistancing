@@ -99,8 +99,8 @@ Yelling</string>
                                     <outletCollection property="gestureRecognizers" destination="fY6-qX-ntV" appends="YES" id="G6D-dx-xU8"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0F-YQ-IgM" userLabel="Target">
-                                <rect key="frame" x="181" y="393.33333333333331" width="13.333333333333343" height="25.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0F-YQ-IgM" userLabel="Target">
+                                <rect key="frame" x="181" y="393.33333333333337" width="13.333333333333343" height="25.333333333333314"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -110,8 +110,7 @@ Yelling</string>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="3eR-Rn-XpZ" firstAttribute="trailing" secondItem="nyU-fN-aJh" secondAttribute="trailing" id="8ud-UI-Sfr"/>
-                            <constraint firstItem="l0F-YQ-IgM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="DnB-dH-VNC"/>
-                            <constraint firstItem="l0F-YQ-IgM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NBD-lY-qeG"/>
+                            <constraint firstItem="l0F-YQ-IgM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NBD-lY-qeG" userLabel="Target.centerX = Ar View.centerX"/>
                             <constraint firstItem="3eR-Rn-XpZ" firstAttribute="leading" secondItem="nyU-fN-aJh" secondAttribute="leading" id="Sdw-MH-42e"/>
                             <constraint firstItem="3eR-Rn-XpZ" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="ea0-4F-Kd7"/>
                             <constraint firstItem="3eR-Rn-XpZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="igk-MQ-CGt"/>
@@ -121,6 +120,7 @@ Yelling</string>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="TargetPlus" destination="l0F-YQ-IgM" id="5Oj-ln-iEl"/>
                         <outlet property="arView" destination="dgB-gS-Y36" id="aMt-kJ-duc"/>
                         <outlet property="distanceDisplay" destination="6ua-7c-RTp" id="VBD-ow-fnN"/>
                         <outlet property="distanceMethodSegmentedControl" destination="bra-7h-0co" id="m27-uW-ZPk"/>
