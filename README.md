@@ -36,5 +36,5 @@ To use this, point the + sign on the screen at the feet of the person that you w
 ![screenshot of target device](installation_screenshots/target_device.png)  
 6. On your phone, you will get a warning that this is from an untrusted developer (This should be you, since you signed it in step 4).  
 To allow, go to Settings > General > Device Management and click allow  
-e.g. [https://apple.stackexchange.com/questions/206143/ios-untrusted-developer-error-when-testing-app] https://apple.stackexchange.com/questions/206143/ios-untrusted-developer-error-when-testing-app
+e.g. https://apple.stackexchange.com/questions/206143/ios-untrusted-developer-error-when-testing-app
 7. Open the App. Point it at people. Make it yell.
